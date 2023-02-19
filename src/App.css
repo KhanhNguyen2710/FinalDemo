@@ -1,38 +1,45 @@
-.App {
-  text-align: center;
+/* google fonts */
+
+@import url("https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Istok+Web&display=swap");
+
+/* reset default style */
+
+* {
+  /* margin: 0;
+  padding: 0; */
+  box-sizing: border-box;
+  color: #bc6c25;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* base style */
+
+body {
+  background: #fefae0;
+  font-family: "Istok Web", sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "RocknRoll One", sans-serif !important;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+a {
+  text-decoration: none;
+  color: unset;
 }
 
-.App-link {
-  color: #61dafb;
+h1,
+h2 {
+  font-size: 2.1rem;
+  font-weight: 600;
+  color: #bc6c25;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+section {
+  padding: 60px 0px;
 }

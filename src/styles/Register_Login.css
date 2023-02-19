@@ -1,0 +1,37 @@
+.Register_input {
+  padding-right: 220px;
+}
+.divider:after,
+.divider:before {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #5e5e5e;
+}
+.h-custom {
+  height: calc(100% - 73px);
+}
+.icon {
+  background: white;
+}
+.register_img {
+  display: flex;
+  justify-content: center;
+}
+.fab icon {
+  background: white;
+}
+.login_btn {
+  display: grid;
+  justify-content: center;
+}
+.log-btn {
+  margin: 10px;
+  background: #dda15e;
+}
+
+@media (max-width: 450px) {
+  .h-custom {
+    height: 100%;
+  }
+}

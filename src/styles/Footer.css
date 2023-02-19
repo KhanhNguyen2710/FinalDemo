@@ -1,0 +1,14 @@
+.footer {
+  padding-top: 50px;
+  padding-bottom: 30px;
+  background: #eccba5;
+}
+.footer_logo img {
+  width: calc(100% - 70%);
+  margin-bottom: 5px;
+}
+.footer_logo h5 {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 15px;
+}

@@ -1,0 +1,51 @@
+.coffee_img {
+  width: 700px;
+}
+.w-100 {
+  height: 500px;
+}
+.content_title {
+  font-size: 2.5;
+  line-height: 55px;
+}
+.content_title span {
+  color: #606c38;
+}
+.coffee_content {
+  padding-top: 70px;
+}
+.coffee_content p {
+  font-size: 1rem;
+  line-height: 30px;
+  color: #dda15e;
+}
+.content_btn button {
+  border: none;
+  outline: none;
+  padding: 7px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.start_btn {
+  background: #606c38;
+  color: #fefae0;
+  transition: 0.3s;
+}
+.start_btn:hover {
+  background: #bc6c25;
+}
+.start_btn i {
+  color: #fefae0;
+}
+.all-recipe-btn {
+  background: transparent;
+  border: 1px solid #606c38 !important;
+}
+.all-recipe-btn a {
+  color: #606c38;
+}
+.all-recipe-btn:hover {
+  border: 1px solid red;
+  color: red;
+}
