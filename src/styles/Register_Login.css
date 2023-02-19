@@ -14,20 +14,25 @@
 .icon {
   background: white;
 }
+.icon:hover {
+  background: #dda15e;
+  color: white;
+}
 .register_img {
   display: flex;
   justify-content: center;
 }
-.fab icon {
-  background: white;
-}
-.login_btn {
+
+.com {
   display: grid;
   justify-content: center;
 }
-.log-btn {
+.login-btn {
   margin: 10px;
   background: #dda15e;
+}
+.login-btn:hover {
+  background: #909b69;
 }
 
 @media (max-width: 450px) {

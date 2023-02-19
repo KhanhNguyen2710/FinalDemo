@@ -1,92 +1,100 @@
-import "mdb-react-ui-kit/dist/css/mdb.min.css";
-import React from "react";
-import ".././styles/Register_Login.css";
-import Register_img from "../img/register_coffee.png";
-
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import {
   MDBBtn,
-  MDBCheckbox,
   MDBCol,
   MDBContainer,
-  MDBIcon,
   MDBInput,
   MDBRow,
 } from "mdb-react-ui-kit";
+import "mdb-react-ui-kit/dist/css/mdb.min.css";
+import React, { useState } from "react";
+import ".././styles/Register_Login.css";
+import Helmet from "../components/Helmet/Helmet";
+import { auth } from "../firebase.js";
+import Register_img from "../img/register_coffee.png";
 
-function App() {
+function Register() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const register = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      const user = userCredential.user;
+      console.log(user);
+    } catch (error) {}
+  };
   return (
-    <MDBContainer fluid className="p-3 my-5 h-custom">
-      <MDBRow>
-        {/* ============= Img ============= */}
-        <MDBCol col="10" md="6">
-          <div className="register_img">
-            <img src={Register_img} alt="" className="w-60" />
-          </div>
-        </MDBCol>
-        {/* ============= lien ket ============= */}
-        <MDBCol col="4" md="6">
-          <div className="Register_input">
-            <div className="icon d-flex flex-row align-items-center justify-content-center ">
-              <p className="lead fw-normal mb-0 me-3">Sign in with</p>
-
-              <MDBBtn floating size="md" tag="a" className="icon me-2">
-                <MDBIcon fab icon="facebook" />
-              </MDBBtn>
-
-              <MDBBtn floating size="md" tag="a" className="icon me-2">
-                <MDBIcon fab icon="twitter" />
-              </MDBBtn>
-
-              <MDBBtn floating size="md" tag="a" className="icon me-2">
-                <MDBIcon fab icon="linkedin-in" />
-              </MDBBtn>
+    <Helmet title="Register">
+      <MDBContainer fluid className="p-3 my-5 h-custom">
+        <MDBRow>
+          {/* ============= Img ============= */}
+          <MDBCol col="10" md="6">
+            <div className="register_img">
+              <img src={Register_img} alt="" className="w-60" />
             </div>
-            {/* ============= Input ============= */}
-            <div className="divider d-flex align-items-center my-4">
-              <p className="text-center fw-bold mx-3 mb-0">Or</p>
-            </div>
+          </MDBCol>
 
-            <MDBInput
-              wrapperClass="mb-4"
-              label="Email address"
-              id="formControlLg"
-              type="email"
-              size="lg"
-            />
-            <MDBInput
-              wrapperClass="mb-4"
-              label="Password"
-              id="formControlLg"
-              type="password"
-              size="lg"
-            />
+          <MDBCol col="4" md="6">
+            <div className="Register_input">
+              {/* ============= Input ============= */}
+              <div className="divider d-flex align-items-center my-4">
+                <p className="text-center fw-bold mx-3 mb-0">REGISTER</p>
+              </div>
+              <form onSubmit={register}>
+                <MDBInput
+                  className="Input mb-4"
+                  label="User name"
+                  type="text"
+                  size="lg"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
 
-            <div className="d-flex justify-content-between mb-4">
-              <MDBCheckbox
-                name="flexCheck"
-                value=""
-                id="flexCheckDefault"
-                label="Remember me"
-              />
-              {/* <a href="!#">Forgot password?</a> */}
-            </div>
+                <MDBInput
+                  className="Input mb-4"
+                  label="Email address"
+                  type="email"
+                  size="lg"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
 
-            <div className="login_btn text-md-start mt-4 pt-2  ">
-              <MDBBtn className="log-btn mb-0 px-5" size="lg">
-                Login
-              </MDBBtn>
-              <p className="small fw-bold mt-2 pt-1 mb-2 ">
-                Don't have an account?{" "}
-                <a href="#!" className="link-danger">
-                  Register
-                </a>
-              </p>
+                <MDBInput
+                  className="Input mb-4"
+                  label="Password"
+                  // type="password"
+                  size="lg"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+
+                <div className="com text-md-start mt-4 pt-2  ">
+                  <MDBBtn
+                    type="submit"
+                    className="login-btn mb-0 px-5"
+                    size="lg"
+                  >
+                    Sign up
+                  </MDBBtn>
+                </div>
+              </form>
             </div>
-          </div>
-        </MDBCol>
-      </MDBRow>
-    </MDBContainer>
+          </MDBCol>
+        </MDBRow>
+      </MDBContainer>
+    </Helmet>
   );
 }
 
-export default App;
+export default Register;
