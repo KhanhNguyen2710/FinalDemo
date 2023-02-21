@@ -1,4 +1,5 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 import {
   MDBBtn,
   MDBCol,
@@ -8,9 +9,10 @@ import {
 } from "mdb-react-ui-kit";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import ".././styles/Register_Login.css";
 import Helmet from "../components/Helmet/Helmet";
-import { auth } from "../firebase.js";
+import { auth, db } from "../firebase.js";
 import Register_img from "../img/register_coffee.png";
 
 function Register() {
@@ -29,10 +31,19 @@ function Register() {
         email,
         password
       );
-
       const user = userCredential.user;
+
+      await setDoc(doc(db, "user", user.uid), {
+        uid: user.uid,
+        displayName: username,
+        email: email,
+        password: password,
+      });
+
       console.log(user);
-    } catch (error) {}
+    } catch (error) {
+      toast.error("wrong");
+    }
   };
   return (
     <Helmet title="Register">
@@ -64,7 +75,7 @@ function Register() {
                 <MDBInput
                   className="Input mb-4"
                   label="Email address"
-                  type="email"
+                  type="email" // @gmail.com
                   size="lg"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -73,7 +84,7 @@ function Register() {
                 <MDBInput
                   className="Input mb-4"
                   label="Password"
-                  // type="password"
+                  // type="password"// ẩn
                   size="lg"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
