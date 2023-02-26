@@ -1,9 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Col, Container, Row } from "reactstrap";
+import CommentSection from "../components/comment-Section/CommentSection";
+import GalleryImgSection from "../components/gallery_Section/GalleryImgSection";
 import Helmet from "../components/Helmet/Helmet.js";
 import contentImg from "../img/coffeeContent.png";
 import "../styles/Home.css";
+
 const Home = () => {
   return (
     <Helmet title="Home">
@@ -35,28 +38,37 @@ const Home = () => {
                 </div>
               </div>
             </Col>
+
             <Col lg="6" md="6">
               <div className="coffee_img">
-                <img src={contentImg} alt="contentImg" className="w-100" />
+                <img
+                  src={contentImg}
+                  alt="contentImg"
+                  style={{ height: 550, width: 700 }}
+                />
               </div>
             </Col>
           </Row>
         </Container>
       </section>
-      {/* ========================================================================= */}
-      {/* <section>
-        <Container>
-          <Row>
-            <Col lg="12">
-              <h5>what am i doing</h5>
-              <h2>Just sit back at Home</h2>
-              <h2>
-                we will <span>take care</span>
-              </h2>
-            </Col>
-          </Row>
-        </Container>
-      </section> */}
+      {/* ======================================Gallery=================================== */}
+
+      <div className="divider d-flex align-items-center my-4">
+        <p className="text-center fw-bold mx-5 mb-0 "></p>
+      </div>
+
+      <section>
+        <GalleryImgSection />
+      </section>
+      {/* ======================================Comment=================================== */}
+
+      <div className="divider d-flex align-items-center my-4">
+        <p className="text-center fw-bold mx-5 mb-0 "></p>
+      </div>
+
+      <section>
+        <CommentSection />
+      </section>
     </Helmet>
   );
 };

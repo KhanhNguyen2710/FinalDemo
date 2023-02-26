@@ -24,6 +24,8 @@
   line-height: 80px;
   /* position: fixed;
   background: #fefae0; */
+  margin-top: 10px;
+  position: sticky;
 }
 .menu a {
   font-weight: 600;
@@ -42,9 +44,12 @@
 
 .cart_icon i,
 .user i,
-.mobile_menu {
+.mobile_menu,
+.profile {
   font-size: 1.3rem;
   cursor: pointer;
+}
+.nav_icon {
 }
 .mobile_menu {
   display: none;
@@ -53,11 +58,15 @@
 .cart_icon {
   position: relative;
 }
-.header_shrink {
+.header_sticky {
   position: sticky;
   top: 0;
   left: 0;
-  box-shadow: 5px 5px 15px -5px red;
+  width: 100%;
+  height: 70%;
+  line-height: 70px;
+  z-index: 999;
+  box-shadow: 3px 3px 8px -3px red;
 }
 
 /* .cart_badge {

@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 import ".././styles/Register_Login.css";
 import Helmet from "../components/Helmet/Helmet";
 import { auth, db } from "../firebase.js";
-import Register_img from "../img/register_coffee.png";
+import Register_img from "../img/lycoffe.png";
 
 function Register() {
   const [email, setEmail] = useState("");
@@ -33,6 +33,7 @@ function Register() {
       );
       const user = userCredential.user;
 
+      // add to firestore
       await setDoc(doc(db, "user", user.uid), {
         uid: user.uid,
         displayName: username,
@@ -52,7 +53,7 @@ function Register() {
           {/* ============= Img ============= */}
           <MDBCol col="10" md="6">
             <div className="register_img">
-              <img src={Register_img} alt="" className="w-60" />
+              <img src={Register_img} alt="" style={{ height: 450 }} />
             </div>
           </MDBCol>
 

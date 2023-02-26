@@ -3,7 +3,6 @@ import { Container } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../img/coffee-Logo.png";
 import "../styles/Navbar.css";
-
 const nav_links = [
   {
     display: "Home",
@@ -75,11 +74,22 @@ const Navbar = () => {
               {/* <span className="cart_badge">2</span> */}
             </span>
 
-            <span className="user">
+            <div className="user">
               <Link to="/login">
                 <i class="ri-user-line"></i>
               </Link>
-            </span>
+              {/* <i class="ri-user-line"></i>
+              <div className="profile_actions">
+                {currentUser ? (
+                  <span>Logout</span>
+                ) : (
+                  <div>
+                    <Link to="/login">Login</Link>
+                    <Link to="/register">Login</Link>
+                  </div>
+                )}
+              </div> */}
+            </div>
 
             <span className="mobile_menu" onClick={toggleMenu}>
               <i class="ri-menu-line"></i>
