@@ -63,3 +63,11 @@
 .masonry_img:hover {
   transform: scale(1.1);
 }
+/* ============= Slick  =========== */
+.comment_text {
+  color: #606c38;
+}
+
+.Custom_Name {
+  color: #917a14;
+}

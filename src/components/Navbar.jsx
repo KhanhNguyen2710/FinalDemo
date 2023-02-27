@@ -47,7 +47,9 @@ const Navbar = () => {
       <Container>
         <div className="nav_wrapper d-flex align-items-center justify-content-between">
           <div className="logo">
-            <img src={logo} alt="logo" />
+            <Link to="/home">
+              <img src={logo} alt="logo" />
+            </Link>
             <h5>Cup's Coffee</h5>
           </div>
           {/* ============MENU ============ */}

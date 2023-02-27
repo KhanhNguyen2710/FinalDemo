@@ -3,7 +3,7 @@ import { Col, Container, Row } from "reactstrap";
 import "../../styles/Home.css";
 import MasonryImages from "./MasonryImages";
 
-const HomeImgSection = () => {
+const GalleryImgSection = () => {
   return (
     <Container>
       <Row>
@@ -19,4 +19,4 @@ const HomeImgSection = () => {
   );
 };
 
-export default HomeImgSection;
+export default GalleryImgSection;
