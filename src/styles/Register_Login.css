@@ -23,15 +23,15 @@
   justify-content: center;
 }
 
-.com {
+.submit {
   display: grid;
   justify-content: center;
 }
-.login-btn {
+.submit-btn {
   margin: 10px;
   background: #dda15e;
 }
-.login-btn:hover {
+.submit-btn:hover {
   background: #909b69;
 }
 

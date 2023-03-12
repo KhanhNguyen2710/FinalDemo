@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import {
   MDBBtn,
@@ -7,8 +7,9 @@ import {
   MDBInput,
   MDBRow,
 } from "mdb-react-ui-kit";
-import "mdb-react-ui-kit/dist/css/mdb.min.css";
+
 import React, { useState } from "react";
+import { Form } from "react-bootstrap";
 import { toast } from "react-toastify";
 import ".././styles/Register_Login.css";
 import Helmet from "../components/Helmet/Helmet";
@@ -19,6 +20,7 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+  const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
 
   const register = async (e) => {
@@ -26,10 +28,12 @@ function Register() {
     setLoading(true);
 
     try {
+      
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
-        password
+        password,
+        
       );
       const user = userCredential.user;
 
@@ -38,6 +42,7 @@ function Register() {
         uid: user.uid,
         displayName: username,
         email: email,
+        phone: phone,
         password: password,
       });
 
@@ -48,63 +53,74 @@ function Register() {
   };
   return (
     <Helmet title="Register">
-      <MDBContainer fluid className="p-3 my-5 h-custom">
-        <MDBRow>
-          {/* ============= Img ============= */}
-          <MDBCol col="10" md="6">
-            <div className="register_img">
-              <img src={Register_img} alt="" style={{ height: 450 }} />
-            </div>
-          </MDBCol>
-
-          <MDBCol col="4" md="6">
-            <div className="Register_input">
-              {/* ============= Input ============= */}
-              <div className="divider d-flex align-items-center my-4">
-                <p className="text-center fw-bold mx-3 mb-0">REGISTER</p>
+      <section>
+        <MDBContainer fluid className="p-3 my-5 h-custom">
+          <MDBRow>
+            {/* ============= Img ============= */}
+            <MDBCol col="10" md="6">
+              <div className="register_img">
+                <img src={Register_img} alt="" style={{ height: 450 }} />
               </div>
-              <form onSubmit={register}>
-                <MDBInput
-                  className="Input mb-4"
-                  label="User name"
-                  type="text"
-                  size="lg"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                />
+            </MDBCol>
 
-                <MDBInput
-                  className="Input mb-4"
-                  label="Email address"
-                  type="email" // @gmail.com
-                  size="lg"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-
-                <MDBInput
-                  className="Input mb-4"
-                  label="Password"
-                  // type="password"// ẩn
-                  size="lg"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-
-                <div className="com text-md-start mt-4 pt-2  ">
-                  <MDBBtn
-                    type="submit"
-                    className="login-btn mb-0 px-5"
-                    size="lg"
-                  >
-                    Sign up
-                  </MDBBtn>
+            <MDBCol col="4" md="6">
+              <div className="Register_input">
+                {/* ============= Input ============= */}
+                <div className="divider d-flex align-items-center my-4">
+                  <h5 className="text-center fw-bold mx-3 mb-0">Register</h5>
                 </div>
-              </form>
-            </div>
-          </MDBCol>
-        </MDBRow>
-      </MDBContainer>
+                <Form onSubmit={register}>
+                  <MDBInput
+                    className="Input mb-4"
+                    label="User name"
+                    type="text"
+                    size="lg"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
+
+                  <MDBInput
+                    className="Input mb-4"
+                    label="Email address"
+                    type="email" // @gmail.com
+                    size="lg"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+
+                  <MDBInput
+                    className="Input mb-4"
+                    label="Phone"
+                    type="number" // 
+                    size="lg"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                  />
+
+                  <MDBInput
+                    className="Input mb-4"
+                    label="Password"
+                    // type="password"// ẩn
+                    size="lg"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+
+                  <div className="submit text-md-start mt-4 pt-2  ">
+                    <MDBBtn
+                      type="submit"
+                      className="submit-btn mb-0 px-5"
+                      size="lg"
+                    >
+                      Sign up
+                    </MDBBtn>
+                  </div>
+                </Form>
+              </div>
+            </MDBCol>
+          </MDBRow>
+        </MDBContainer>
+      </section>
     </Helmet>
   );
 }

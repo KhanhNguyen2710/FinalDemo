@@ -4,9 +4,9 @@ import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "react-toastify/dist/ReactToastify.css";
 import "remixicon/fonts/remixicon.css";
 import "./App.css";
-import Layout from "./components/Layout.js";
+import Layout from "./components/Layout/Layout.js";
 import "./styles/Body.css";
-import "./styles/Navbar.css";
+import "./components/Navbar/Navbar.css";
 
 function App() {
   return <Layout />;

@@ -1,7 +1,11 @@
 import React from "react";
 
 function Recipe() {
-  return <div>Recipe</div>;
+  return (
+    <section>
+      <div>Recipe</div>;
+    </section>
+  );
 }
 
 export default Recipe;

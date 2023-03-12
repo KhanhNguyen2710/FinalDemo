@@ -1,0 +1,9 @@
+.Add_product{
+ border: 3px solid rgb(109, 109, 109);
+ border-radius: 20px;
+ background: #fcf7d9;
+}
+
+.addInput{
+  border-radius: 10px;
+}

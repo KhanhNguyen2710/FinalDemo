@@ -1,49 +1,35 @@
-import React, { useRef } from "react";
+import React, { useRef,useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
-import logo from "../img/coffee-Logo.png";
-import "../styles/Navbar.css";
-const nav_links = [
-  {
-    display: "Home",
-    path: "/home",
-  },
-  {
-    display: "Recipe",
-    path: "/recipe",
-  },
-  {
-    display: "Contact",
-    path: "/contact",
-  },
-  {
-    display: "Cart",
-    path: "/cart",
-  },
-];
+import logo from "../../img/coffee-Logo.png";
+import "../Navbar/Navbar.css";
+import useAuth from "../../custom/useAuth"
+import "./Nav_links"
+import Nav_links from "./Nav_links";
+
 
 const Navbar = () => {
   const menuRef = useRef(null);
   // const headerRef = useRef(null);
 
   const toggleMenu = () => menuRef.current.classList.toggle("show_menu");
-
   // useEffect(() => {
   //   window.addEventListener("scroll", () => {
   //     if (
   //       document.body.scrollTop > 80 ||
   //       document.documentElement.scrollTop > 80
   //     ) {
-  //       headerRef.current.classList.add("header_shrink");
+  //       headerRef.current.classList.add("header_sticky");
   //     } else {
-  //       headerRef.current.classList.remove("header_shrink");
+  //       headerRef.current.classList.remove("header_sticky");
   //     }
   //   });
   //   return () => window.removeEventListener("scroll");
   // }, []);
+const {currentUser} = useAuth() 
 
   return (
-    <header className="header">
+    <header className="header" >
       <Container>
         <div className="nav_wrapper d-flex align-items-center justify-content-between">
           <div className="logo">
@@ -55,7 +41,7 @@ const Navbar = () => {
           {/* ============MENU ============ */}
           <div className="navigation" ref={menuRef} onClick={toggleMenu}>
             <div className="menu d-flex align-items-center gap-5">
-              {nav_links.map((item, index) => (
+              {Nav_links.map((item, index) => (
                 <NavLink
                   onClick={toggleMenu}
                   to={item.path}

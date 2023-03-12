@@ -47,12 +47,10 @@
   justify-content: center;
 }
 /* ============= masonry  =========== */
-.divider {
-  margin: 0px 200px;
-}
+
 .content-Masonry {
   margin-bottom: 50px;
-  text-align: center;
+  /* text-align: center; */
 }
 .text-Masonry {
   color: red;

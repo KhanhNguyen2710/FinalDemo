@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import Ava from "../../img/Ava.jpg";
 
@@ -38,20 +39,23 @@ const CommentSection = () => {
     <Slider {...settings}>
       {/* =================================01================================= */}
       <div className="comment py-4 px-3">
-        <p className="comment_text">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. A fugiat
-          alias non quas tempora, rerum labore maiores ex recusandae nostrum
-          blanditiis iure dolores quibusdam quia accusamus veniam optio iusto
-          iste!
-        </p>
-        <div className="d-flex align-item-center gap-4 mt-3">
-          <img src={Ava} className="w-25 h-25 rounded-2" alt="" />
-          <div>
-            <h6 className="Custom_Name mb-0 mt-3">Madam</h6>
-            <p>Customer</p>
+        
+          <p className="comment_text">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. A fugiat
+            alias non quas tempora, rerum labore maiores ex recusandae nostrum
+            blanditiis iure dolores quibusdam quia accusamus veniam optio iusto
+            iste!
+          </p>
+          <div className="d-flex align-item-center gap-4 mt-3">
+            <img src={Ava} className="w-25 h-25 rounded-2" alt="" />
+            <div>
+              <h6 className="Custom_Name mb-0 mt-3">Madam</h6>
+              <p>Customer</p>
+            </div>
           </div>
-        </div>
+        
       </div>
+
       {/* =================================02================================= */}
 
       <div className="comment py-4 px-3">

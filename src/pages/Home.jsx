@@ -52,19 +52,11 @@ const Home = () => {
         </Container>
       </section>
       {/* ======================================Gallery=================================== */}
-
-      <div className="divider d-flex align-items-center my-4">
-        <p className="text-center fw-bold mx-5 mb-0 "></p>
-      </div>
-
+    
       <section>
         <GalleryImgSection />
       </section>
       {/* ======================================Comment=================================== */}
-
-      <div className="divider d-flex align-items-center my-4">
-        <p className="text-center fw-bold mx-5 mb-0 "></p>
-      </div>
 
       <section>
         <CommentSection />
