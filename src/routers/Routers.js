@@ -2,6 +2,7 @@ import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Blog from "../pages/Blog";
 import Cart from "../pages/Cart.jsx";
+
 import Home from "../pages/Home.jsx";
 import Login from "../pages/Login.jsx";
 import Product from "../pages/Product";
@@ -17,9 +18,9 @@ const Routers = () => {
       <Route
         path="/home"
         element={
-          <ProtectedRoute>
+          // <ProtectedRoute>
             <Home />
-          </ProtectedRoute>
+          // </ProtectedRoute>
         }
       />
       <Route path="/cart" element={<Cart />} />

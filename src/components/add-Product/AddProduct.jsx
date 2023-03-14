@@ -32,7 +32,7 @@ const AddProduct = () => {
             
             await setDoc(doc(db, "product"), {
               nameProduct: product,
-              img: file,
+              img: downloadURL,
             });
           });
         }

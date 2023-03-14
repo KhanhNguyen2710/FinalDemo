@@ -1,0 +1,10 @@
+.blog_img {
+  transition: 0.2s;
+  
+}
+.blog_img:hover {
+  transform: scale(1.1);
+}
+.show:hover{
+
+}

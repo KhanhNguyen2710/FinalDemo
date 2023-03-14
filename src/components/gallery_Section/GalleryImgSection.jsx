@@ -7,7 +7,7 @@ const GalleryImgSection = () => {
   return (
     <Container>
       <Row>
-        <Col lg="12" className="content-Masonry  ">
+        <Col lg="12" className="content-Masonry">
           <h5>Image</h5>
           <h2>Lorem ipsum dolor sit amet</h2>
         </Col>
