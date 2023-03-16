@@ -1,9 +1,9 @@
-import { addDoc, collection, doc, setDoc } from "firebase/firestore";
-import { getDownloadURL, listAll, ref, uploadBytesResumable } from "firebase/storage";
-import React, { useEffect, useState } from "react";
+import { addDoc, collection } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import React, { useState } from "react";
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import { Input } from "reactstrap";
-import BlogShow from "../components/blog/BlogShow";
+import BlogShow from "../components/blog/block-show-img/BlogShow";
 import Helmet from "../components/Helmet/Helmet";
 import { db, storage } from "../firebase";
 import "../styles/Blog.css";
@@ -12,6 +12,7 @@ const Blog = () => {
   const [show, setShow] = useState(false);
   const [file, setFile] = useState(null);
   const [content, setContent] = useState("");
+  const [title, setTitle] = useState("");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -48,6 +49,7 @@ const Blog = () => {
         getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
           await addDoc(collection(db, "content"), {
             img: downloadURL,
+            title: title,
             content: content,
           });
         });
@@ -74,6 +76,7 @@ const Blog = () => {
             +
           </Button>
         </div>
+
         <Modal size="lg" show={show} onHide={handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>Your Picture</Modal.Title>
@@ -94,6 +97,13 @@ const Blog = () => {
                 {/* ====== img End ====== */}
                 {/* ====== content Start ====== */}
                 <Col lg="6" md="6">
+                  <label>Title</label>
+                  <Form.Control
+                    type="text"
+                    style={{ borderRadius: "15px" }}
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                  />
                   <label>Content</label>
                   <Form.Control
                     as="textarea"
@@ -122,7 +132,7 @@ const Blog = () => {
 
       <section>
         <div>
-          <BlogShow/>
+          <BlogShow />
         </div>
       </section>
     </Helmet>
