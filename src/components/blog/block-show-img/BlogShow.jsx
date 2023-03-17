@@ -68,6 +68,7 @@ const BlogShow = () => {
       {/* ======props into BlogModal====== */}
       {selectedImage && (
         <BlogModal
+          
           show={modalShow}
           onHide={() => setModalShow(false)}
           id={selectedImage.id}

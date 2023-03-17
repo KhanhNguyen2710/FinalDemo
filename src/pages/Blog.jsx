@@ -118,6 +118,7 @@ const Blog = () => {
             </Modal.Body>
 
             {/* =======================Body End======================= */}
+            {/* =======================Footer Start======================= */}
             <Modal.Footer>
               <Button variant="secondary" onClick={handleClose}>
                 Close
@@ -126,6 +127,7 @@ const Blog = () => {
                 Save
               </Button>
             </Modal.Footer>
+            {/* =======================Footer End======================= */}
           </Form>
         </Modal>
       </section>

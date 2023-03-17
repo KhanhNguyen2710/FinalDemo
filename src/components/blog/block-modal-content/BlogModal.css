@@ -1,0 +1,31 @@
+ @import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css'); */
+
+.header-modal{
+  background: rgb(255, 255, 255);
+  border-radius: 500px;
+
+}
+
+/* modal-content is name css of bootstrap  */
+.modal-content{
+  border-radius:25px;
+  background: rgb(255, 255, 255);
+  max-height: 100%;
+  
+}
+.body-modal {
+  overflow-y: auto;
+  text-align: center;
+  padding: 64px 120px;
+}
+
+.contentImg {
+  text-align: justify;
+}
+
+.btn-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 1.5rem;
+  z-index: 1050;
+}
