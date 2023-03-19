@@ -14,7 +14,7 @@ import React from 'react'
     path: "/product",
   },
   {
-    display: "Blog",
+    display: "Blogs",
     path: "/blog",
   },
   {

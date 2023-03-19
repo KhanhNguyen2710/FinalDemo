@@ -1,111 +1,88 @@
-import React, { useState } from "react";
-import { Button, Col, Modal, Row } from "react-bootstrap";
-import "../block-modal-content/BlogModal.css"
+import React from "react";
+import { Col, Modal, Row } from "react-bootstrap";
+import "../block-modal-content/BlogModal.css";
+import Ava from "../../../img/Ava.jpg"
+
 function BlogModal({ id, contentImg, title, img, ...props }) {
-  // const [imageList, setImageList] = useState([]); //array
-  // const [selectedImage, setSelectedImage] = useState(null);
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     let data = [];
-  //     const querySnapshot = await getDocs(collection(db, "content"));
-  //     querySnapshot.forEach((doc) => {
-  //       // doc.data()
-  //       data.push({ id: doc.id, ...doc.data() });
-  //       // console.log(doc.id, " => ", doc.data());
-  //     });
-  //     setImageList(data);
-  //   };
-  //   getData();
-  // }, []);
-
-  // const getDocument = async (docId) => {
-  //   const document = await getDoc(doc(db, "content", docId));
-  //   if (document.exists()) {
-  //     setSelectedImage({ id: document.id, ...document.data() });
-  //     console.log("Document data:", document.data());
-  //   } else {
-  //     console.log("No such document!");
-  //   }
-  // };
-
   return (
-    <Modal
-      {...props}
-      size="fullscreen"
-      aria-labelledby=" contained-modal-title-vcenter"
-      centered
-      className="animate__animated animate__slideInUp"
-      style={{ marginTop: "3rem" }}
-    >
-      <button
-        className="btn-close  mb-4"
-        onClick={props.onHide}
-      ></button>
-      {/* <Modal.Header closeButton className="header-modal"></Modal.Header> */}
+    <div>
+      <Modal
+        {...props}
+        size="fullscreen"
+        aria-labelledby=" contained-modal-title-vcenter"
+        centered
+        className=" animate__animated animate__slideInUp animate__faster"
+        style={{ marginTop: "2.0rem", borderRadius: "25px" }}
+      >
+        <button className="btn-close  mb-2" onClick={props.onHide}></button>
 
-      {/* ========== OP 1 ========== */}
-      {/* <Modal.Body className=" p-0">
-          <Row>
-            <Col lg="7" md="7">
+        <Modal.Body>
+          <Row className=" body-section ">
+            {/* ===================== Author  ===================== */}
+            <div className="d-flex align-item-center gap-4 mb-3">
               <img
-                src={img}
+                src={Ava}
+                style={{
+                  width: "50px",
+                  height: "50px",
+                  borderRadius: "50%",
+                  marginLeft: "20px",
+                }}
                 alt=""
+              />
+              <div>
+                <h6 className="Custom_Name mb-0 mt-3">Chiba Inu</h6>
+              </div>
+            </div>
+            {/* =================img================= */}
+
+            <Col lg="7" md="7">
+              <div
                 style={{
                   width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  borderRadius: "25px 0 0px 25px",
+                  height: "550px",
+                  borderRadius: "25px",
+                  display: "flex",
+                  justifyContent: "center",
+                  // background: "#E6E6E6",
                 }}
-              />
+              >
+                <img
+                  className="img-content "
+                  src={img}
+                  alt=""
+                  style={{
+                    maxWidth: "100%",
+                    maxHeight: "100%",
+                    borderRadius: "25px",
+                    boxShadow:"5"
+                  }}
+                />
+              </div>
             </Col>
 
-            <Col lg="5" md="5" className="p-3">
-              <button
-                className="btn-close  mb-4"
-                style={{
-                  display: "flex",
-                  marginLeft: "auto",
-                  marginRight: "20px",
-                }}
-                onClick={props.onHide}
-              ></button>
-              <h3 className="mb-4" style={{ color: "black" }}>
-                {title}
-              </h3>
-              {contentImg}
+            {/* =================content================= */}
+            <Col lg="5" md="5">
+              {/* ===================== ===================== */}
+              <div style={{ overflowY: "auto", height: "550px" }}>
+                <h3
+                  className="mb-4 d-flex fw-bold justify-content-center "
+                  style={{ color: "black" }}
+                >
+                  {title}
+                </h3>
+
+                <p className="contentImg ">{contentImg}</p>
+              </div>
             </Col>
           </Row>
-        </Modal.Body> */}
-      {/* ========== OP 2 ========== */}
+        </Modal.Body>
 
-      {/* <Modal.Header
-        closeButton
-        className="header-modal"
-        style={{  }}
-      ></Modal.Header> */}
-      <Modal.Body>
-        <div className="body-modal">
-          <img
-            src={img}
-            alt=""
-            style={{
-              width: "50%",
-              height: "50%",
-              objectFit: "cover",
-              // borderRadius: "25px 0 0px 25px",
-            }}
-          />
-          <h3 className="mb-4" style={{ color: "black" }}>
-            {title}
-          </h3>
-          <p className="contentImg ">{contentImg}</p>
-        </div>
-      </Modal.Body>
-
-      {/* <Modal.Footer>
+        {/* <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>
       </Modal.Footer> */}
-    </Modal>
+      </Modal>
+    </div>
   );
 }
 export default BlogModal;

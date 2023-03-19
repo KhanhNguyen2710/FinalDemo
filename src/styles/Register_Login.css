@@ -12,7 +12,7 @@
   height: calc(100% - 73px);
 }
 .icon {
-  background: white;
+  background: rgb(0, 0, 0);
 }
 .icon:hover {
   background: #dda15e;

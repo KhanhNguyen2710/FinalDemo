@@ -5,6 +5,7 @@ import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { db } from "../../../firebase";
 import BlogModal from "../block-modal-content/BlogModal";
 import "./BlogShow.css";
+import Ava from "../../../img/Ava.jpg"
 
 const BlogShow = () => {
   const [imageList, setImageList] = useState([]);
@@ -50,7 +51,17 @@ const BlogShow = () => {
                 setModalShow(true);
               }}
             >
-              <label>{item.title}</label>
+              {/* xác thực  */}
+              <div>
+                <img
+                  className="mb-2 "
+                  src={Ava}
+                  alt=""
+                  style={{ width: "40px", height: "40px", borderRadius: "50%",marginRight: "10px" }}
+                />
+
+                <label> name </label>
+              </div>
               <img
                 src={item.img}
                 alt=""
@@ -68,7 +79,6 @@ const BlogShow = () => {
       {/* ======props into BlogModal====== */}
       {selectedImage && (
         <BlogModal
-          
           show={modalShow}
           onHide={() => setModalShow(false)}
           id={selectedImage.id}

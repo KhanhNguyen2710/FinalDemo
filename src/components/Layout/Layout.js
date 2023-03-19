@@ -1,7 +1,7 @@
 import React from "react";
 //import Body from './Body';
 import Router from "../../routers/Routers.js";
-import Footer from "../Footer";
+import Footer from "../footer/Footer";
 import Navbar from "../Navbar/Navbar.jsx";
 import "./Layout.css"
 

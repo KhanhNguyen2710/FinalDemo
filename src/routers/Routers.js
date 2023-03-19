@@ -1,5 +1,6 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
+import AddProduct from "../components/product/add-Product/AddProduct";
 import Blog from "../pages/Blog";
 import Cart from "../pages/Cart.jsx";
 
@@ -19,20 +20,19 @@ const Routers = () => {
         path="/home"
         element={
           // <ProtectedRoute>
-            <Home />
+          <Home />
           // </ProtectedRoute>
         }
       />
+
       <Route path="/cart" element={<Cart />} />
       <Route path="/product" element={<Product />} />
-
-
-      <Route path="/profile" element={<Profile/>} />
-
+      <Route path="/profile" element={<Profile />} />
       <Route path="/recipe" element={<Recipe />} />
       <Route path="/blog" element={<Blog />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/addProduct" element={<AddProduct />} />
     </Routes>
   );
 };

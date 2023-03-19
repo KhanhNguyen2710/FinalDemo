@@ -29,14 +29,15 @@ const Navbar = () => {
 const {currentUser} = useAuth() 
 
   return (
-    <header className="header" >
+    <header className="header">
       <Container>
         <div className="nav_wrapper d-flex align-items-center justify-content-between">
           <div className="logo">
             <Link to="/home">
               <img src={logo} alt="logo" />
+
+              <h5>Cup's Coffee</h5>
             </Link>
-            <h5>Cup's Coffee</h5>
           </div>
           {/* ============MENU ============ */}
           <div className="navigation" ref={menuRef} onClick={toggleMenu}>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Container, Row } from "reactstrap";
-import logo from "../img/coffee-Logo.png";
-import "../styles/Footer.css";
+import logo from "../../img/coffee-Logo.png";
+import "../../styles/Footer.css";
 
 const Footer = () => {
   return (

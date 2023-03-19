@@ -1,0 +1,50 @@
+.sideBar-Product{
+width: 100%;
+  padding: 20px;
+  border: 1px solid #BC6C25;
+  border-radius:10px;
+  display:flex;
+  flex-direction: column;
+}
+
+
+.search-product{
+  width: 100%;
+  position: relative;
+  display: flex;
+  
+}
+.searchItem {
+  width: 100%;
+  border: 3px solid #BC6C25;
+  border-right: none;
+  padding: 5px;
+  height: 36px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  
+}
+
+.searchButton {
+  width: 50px;
+  height: 36px;
+  border: 1px solid #BC6C25;
+  background: #BC6C25;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.btn-primary {
+  background-color:#BC6C25 ;
+  box-shadow: 0 4px 9px -4px #444444;
+}
+.btn-primary:hover{
+  background: black;
+}
+
+.select-choose{
+  border-radius: 15px;
+}
