@@ -13,10 +13,14 @@ const Blog = () => {
   const [file, setFile] = useState(null);
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
+  const [preview, setPreview] = useState(null);
+
+
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+//  add data
   const addBlog = async (e) => {
     e.preventDefault();
     // try {
@@ -30,16 +34,6 @@ const Blog = () => {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log("Upload is " + progress + "% done");
-        // switch (snapshot.state) {
-        //   case "paused":
-        //     console.log("Upload is paused");
-        //     break;
-        //   case "running":
-        //     console.log("Upload is running");
-        //     break;
-        //   default:
-        //     break;
-        // }
       },
       (error) => {
         console.log("Upload error: " + error);
@@ -59,6 +53,12 @@ const Blog = () => {
     // } catch (error) {
     //   console.log("error");
     // }
+  };
+// xem ảnh 
+  const handleFileInputChange = (e) => {
+    const file = e.target.files[0];
+    setPreview(URL.createObjectURL(file));
+    setFile(file);
   };
 
   return (
@@ -90,9 +90,17 @@ const Blog = () => {
                   <label>Add image</label>
                   <Input
                     type="file"
-                    onChange={(e) => setFile(e.target.files[0])}
                     style={{ borderRadius: "15px" }}
+                    // onChange={(e) => setFile(e.target.files[0])}
+                    onChange={handleFileInputChange}
                   />
+                  {preview && (
+                    <img
+                      src={preview}
+                      alt=""
+                      style={{ maxWidth: "100%", maxHeight: "200px" }}
+                    />
+                  )}
                 </Col>
                 {/* ====== img End ====== */}
                 {/* ====== content Start ====== */}

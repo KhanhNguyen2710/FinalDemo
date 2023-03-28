@@ -3,20 +3,25 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
+import Store from "./redux/Store";
+import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import "remixicon/fonts/remixicon.css";
+
 
 import "./App.css";
 import App from "./App.js";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  // <React.StrictMode>
+  <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <Provider store={Store}>
+        <App />
+      </Provider>
     </BrowserRouter>
-  // </React.StrictMode>
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

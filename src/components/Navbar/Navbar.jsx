@@ -6,6 +6,7 @@ import "../Navbar/Navbar.css";
 import useAuth from "../../custom/useAuth"
 import "./Nav_links"
 import Nav_links from "./Nav_links";
+import { useSelector } from "react-redux";
 
 
 const Navbar = () => {
@@ -13,19 +14,9 @@ const Navbar = () => {
   // const headerRef = useRef(null);
 
   const toggleMenu = () => menuRef.current.classList.toggle("show_menu");
-  // useEffect(() => {
-  //   window.addEventListener("scroll", () => {
-  //     if (
-  //       document.body.scrollTop > 80 ||
-  //       document.documentElement.scrollTop > 80
-  //     ) {
-  //       headerRef.current.classList.add("header_sticky");
-  //     } else {
-  //       headerRef.current.classList.remove("header_sticky");
-  //     }
-  //   });
-  //   return () => window.removeEventListener("scroll");
-  // }, []);
+
+// const cartItems = useSelector((state) => state.cart.cartItems);
+
 const {currentUser} = useAuth() 
 
   return (
@@ -60,7 +51,7 @@ const {currentUser} = useAuth()
           <div className="nav_right d-flex align-items-center gap-4">
             <span className="cart_icon">
               <i class="ri-shopping-bag-2-line"></i>
-              {/* <span className="cart_badge">2</span> */}
+              {/* <span className="cart_badge">{cartItems}</span> */}
             </span>
 
             <div className="user">

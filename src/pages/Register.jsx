@@ -10,6 +10,7 @@ import {
 
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import ".././styles/Register_Login.css";
 import Helmet from "../components/Helmet/Helmet";
@@ -91,8 +92,9 @@ function Register() {
                   <MDBInput
                     className="Input mb-4"
                     label="Phone"
-                    type="number" // 
+                    type="number" //
                     size="lg"
+                    min="0"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                   />
@@ -112,7 +114,7 @@ function Register() {
                       className="submit-btn mb-0 px-5"
                       size="lg"
                     >
-                      Sign up
+                      <Link to="/login"> Sign up </Link>
                     </MDBBtn>
                   </div>
                 </Form>

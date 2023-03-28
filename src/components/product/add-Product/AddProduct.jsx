@@ -6,14 +6,15 @@ import "./AddProduct.css";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { db, storage } from "../../../firebase";
 import { Input } from "reactstrap";
+import { Link } from "react-router-dom";
 
 
 const AddProduct = () => {
 
   const [file, setFile] = useState(null);
+  const [productName, setProductName] = useState("");
+  const [price, setPrice] = useState("");
   const [describe, setDescribe] = useState("");
-  const [title, setTitle] = useState("");
-    const [price, setPrice] = useState("");
 
 
 
@@ -38,7 +39,7 @@ const AddProduct = () => {
         getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
           await addDoc(collection(db, "product"), {
             img: downloadURL,
-            title: title,
+            productName: productName,
             describe: describe,
             price: price,
           });
@@ -75,12 +76,12 @@ const AddProduct = () => {
             </Col>
             {/* ======================= Add info product ======================= */}
             <Col lg="6" md="6">
-              <label>Title</label>
+              <label>Product's name</label>
               <Form.Control
                 type="text"
                 style={{ borderRadius: "10px" }}
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                value={productName}
+                onChange={(e) => setProductName(e.target.value)}
               />
 
               <label>Describe</label>
@@ -93,16 +94,17 @@ const AddProduct = () => {
               />
               <label>Price</label>
               <Form.Control
-                type="text"
+                type="number"
                 style={{ borderRadius: "10px" }}
                 value={price}
+                min="0"
                 onChange={(e) => setPrice(e.target.value)}
               />
             </Col>
 
-            <button className="m-3" type="submit">
-              add
-            </button>
+            <Button className="m-3" type="submit">
+              ADD
+            </Button>
           </Row>
         </form>
       </Container>
