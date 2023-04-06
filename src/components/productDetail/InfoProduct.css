@@ -1,0 +1,44 @@
+.imgInfo{
+    display: flex;
+    justify-content: center;
+}
+.btn-quantity {
+  background:#fefae0;
+  color: rgb(0, 0, 0);
+  border-radius: 15px;
+}
+.btn-quantity:hover{
+  background: #ebb587;
+}
+
+
+.product-tabs {
+  /* background-color: #be7b41; */
+  border-bottom: 2px  solid #be7b41;
+  
+}
+.product-tabs .nav-link:hover {
+  background-color: #606c38;
+  color: #fefae0;
+  font-weight: bolder;
+}
+
+.product-tabs .nav-link {
+  color: #000000;
+  font-size: 14px;
+
+}
+
+.product-tabs .nav-link.active {
+  background-color: #606c38;
+  color: #fefae0;
+ 
+}
+
+
+.tab{
+  padding:15px;
+  background: #50573828;
+  color: #000000;
+  border-radius: 0px 0px 15px 15px;
+}

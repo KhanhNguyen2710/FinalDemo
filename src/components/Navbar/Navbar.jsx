@@ -10,12 +10,14 @@ import { useSelector } from "react-redux";
 
 
 const Navbar = () => {
+  const settings = ["Profile", "Account", "Dashboard", "Logout"];
   const menuRef = useRef(null);
   // const headerRef = useRef(null);
 
   const toggleMenu = () => menuRef.current.classList.toggle("show_menu");
 
 // const cartItems = useSelector((state) => state.cart.cartItems);
+  const totalQuantity = useSelector((state) => state.cart.totalQuantity);
 
 const {currentUser} = useAuth() 
 
@@ -51,7 +53,9 @@ const {currentUser} = useAuth()
           <div className="nav_right d-flex align-items-center gap-4">
             <span className="cart_icon">
               <i class="ri-shopping-bag-2-line"></i>
-              {/* <span className="cart_badge">{cartItems}</span> */}
+              {totalQuantity !== 0 && (
+                <span className="cart_badge">{totalQuantity}</span>
+              )}
             </span>
 
             <div className="user">

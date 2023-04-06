@@ -10,7 +10,7 @@ import Product from "../pages/Product";
 import Profile from "../pages/Profile";
 import Recipe from "../pages/Recipe.jsx";
 import Register from "../pages/Register.jsx";
-import ProtectedRoute from "./ProtectedRoute";
+import ProductDetail from "../pages/ProductDetail";
 
 const Routers = () => {
   return (
@@ -24,15 +24,18 @@ const Routers = () => {
           // </ProtectedRoute>
         }
       />
+   
 
       <Route path="/cart" element={<Cart />} />
       <Route path="/product" element={<Product />} />
+      <Route path="/addProduct" element={<AddProduct />} />
+
+      <Route path="/productDetail/:id" element={<ProductDetail />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/recipe" element={<Recipe />} />
       <Route path="/blog" element={<Blog />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/addProduct" element={<AddProduct />} />
     </Routes>
   );
 };

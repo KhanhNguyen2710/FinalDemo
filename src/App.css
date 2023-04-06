@@ -45,3 +45,11 @@ h2 {
 section {
   padding: 30px 0px;
 }
+
+.btn-primary {
+  background-color:#be7b41 ;
+  box-shadow: 0 4px 9px -4px #444444;
+}
+.btn-primary:hover{
+  background: #788339;
+}

@@ -1,20 +1,21 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Button, Card } from 'react-bootstrap';
-import "../show-Product/ShowProduct.css"
-import  Ava  from "../../../img/Ava.jpg";
-import { db } from '../../../firebase';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, getDoc, doc } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
+import { db } from "../../../firebase";
+import "../show-Product/ShowProduct.css";
+
+
+
 
 import { useDispatch } from "react-redux";
-import { cartActions } from '../../../redux/CartReducer';
-
-
+import { cartActions } from "../../../redux/CartReducer";
+import InfoProduct from "../../productDetail/InfoProduct";
+import { Link } from "react-router-dom";
 
 
 const ShowProduct = () => {
-
   const [productList, setProductList] = useState([]);
-  // const [cartItems, setCartItems] = useState([]);
+  const [productDetail, setProductDetail] = useState(null);
 
   useEffect(() => {
     const getData = async () => {
@@ -29,30 +30,33 @@ const ShowProduct = () => {
     getData();
   }, []);
 
-
-
-  // const handleAddToCart = () => {
-  //   addToCart(product);
-  // };
-
-  const dispatch = useDispatch();
-
-//   const addToCart = () => {
-//     dispatch(cartActions.addItem({
-//       id: product.id,
-//       productName: product.productName,
-//       price: product.price,
-//       image: product.img,
-//     }))
+// const getDocument = async (docId) => {
+//   const document = await getDoc(doc(db, "product", docId));
+//   if (document.exists()) {
+//     setProductDetail({ id: document.id, ...document.data() });
+//     console.log("Document data:", document.data());
+//   } else {
+//     console.log("No such document!");
 //   }
 // };
+
+  const dispatch = useDispatch();
 
 
 
   return (
     <div className=" show-Product">
       {productList.map((product, index) => (
-        <div className="product-item " product={product} key={index}>
+        <div
+          className="product-item "
+          product={product}
+          key={index}
+          onClick={() => {
+            // getDocument(product.id);
+          }}
+
+          // onClick={() => showProductDetails(product)}
+        >
           {/* ====================img product==================== */}
           <div className="product-img d-flex justify-content-center mb-2">
             <img
@@ -67,8 +71,14 @@ const ShowProduct = () => {
           </div>
           {/* ====================img text==================== */}
 
-          <div className="product-content">
-            <h5>{product.title}</h5>
+          <div className="product-content p-2">
+            <Link
+              to={`/productDetail/${product.id}`}
+              state={{ product }}
+              key={index}
+            >
+              <h5>{product.productName}</h5>
+            </Link>
             <div>
               <span className="d-flex justify-content-end mb-2">
                 {product.price + "$"}
@@ -94,7 +104,20 @@ const ShowProduct = () => {
           </div>
         </div>
       ))}
+
+      {/* {productDetail && (
+        <InfoProduct
+          id={productDetail.id}
+          describe={productDetail.describe}
+          title={productDetail.price}
+          img={productDetail.img}
+          name={productDetail.productName}
+        />
+      )} */}
     </div>
+
+    // {/* {selectedProduct && <ProductDetails product={selectedProduct} />} */}
   );
-}
+ 
+};
 export default ShowProduct;

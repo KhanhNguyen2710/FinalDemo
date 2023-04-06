@@ -8,7 +8,9 @@ import Ava from "../img/Ava.jpg"
 
 function Cart() {
 
-  // const cartItems = useSelector((state) => state.cart.cartItems);
+  // const cartProduct = useSelector((state) => state.cart.CartReducer);
+    const cartProduct = useSelector(state => state.cart.cartProduct);
+// console.log(cartProduct);
 
   return (
     <section className="h-100 gradient-custom">
@@ -27,52 +29,52 @@ function Cart() {
                     <th scope="col">Price</th>
                   </tr>
                 </MDBTableHead>
-                <MDBTableBody>
-                  <tr>
-                    <th scope="row">
-                      <div className="d-flex align-items-center">
-                        <img
-                          src={Ava}
-                          fluid
-                          className="rounded-3"
-                          style={{ width: "120px" }}
-                          alt="Book"
-                        />
-                        <div className="flex-column ms-4">
-                          <p className="mb-2">chó shiba</p>
+                {/* ======================================================== */}
+                {cartProduct.map((item) => (
+                  <MDBTableBody>
+                    <tr key={item.id}>
+                      <th scope="row">
+                        <div className="d-flex align-items-center">
+                          <img
+                            src={item.image}
+                            fluid
+                            className="rounded-3"
+                            style={{ width: "120px" }}
+                            alt="Product"
+                          />
+                          <div className="flex-column ms-4">
+                            <p className="mb-2">{item.productName}</p>
+                          </div>
                         </div>
-                      </div>
-                    </th>
-                    {/* <td className="align-middle">
-                      <p className="mb-0" style={{ fontWeight: "500" }}>
-                        Digital
-                      </p>
-                    </td> */}
-                    <td className="align-middle">
-                      <div class="d-flex flex-row align-items-center">
-                        <MDBBtn className="px-2" color="link">
-                          <MDBIcon fas icon="minus" />
-                        </MDBBtn>
+                      </th>
+                      <td className="align-middle">
+                        <div class="d-flex flex-row align-items-center">
+                          <MDBBtn className="px-2" color="link">
+                            <MDBIcon fas icon="minus" />
+                          </MDBBtn>
 
-                        <MDBInput
-                          min={0}
-                          type="number"
-                          size="sm"
-                          style={{ width: "50px" }}
-                          defaultValue={1}
-                        />
-                        <MDBBtn className="px-2" color="link">
-                          <MDBIcon fas icon="plus" />
-                        </MDBBtn>
-                      </div>
-                    </td>
-                    <td className="align-middle">
-                      <p className="mb-0" style={{ fontWeight: "500" }}>
-                        $1
-                      </p>
-                    </td>
-                  </tr>
-                </MDBTableBody>
+                          <MDBInput
+                            min={0}
+                            type="number"
+                            size="sm"
+                            style={{ width: "50px" }}
+                            defaultValue={1}
+                          />
+                          <MDBBtn className="px-2" color="link">
+                            <MDBIcon fas icon="plus" />
+                          </MDBBtn>
+                        </div>
+                      </td>
+                      <td className="align-middle">
+                        <p className="mb-0" style={{ fontWeight: "500" }}>
+                          {item.totalPrice} $
+                        </p>
+                      </td>
+                    </tr>
+                  </MDBTableBody>
+                ))}
+
+                {/* ======================================================== */}
               </MDBTable>
             </MDBCard>
           </Col>
@@ -108,8 +110,6 @@ function Cart() {
                 </MDBBtn>
               </MDBCardBody>
             </MDBCard>
-
-          
           </Col>
         </Row>
       </Container>

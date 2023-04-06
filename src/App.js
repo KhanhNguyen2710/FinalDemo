@@ -11,5 +11,4 @@ import "./components/Navbar/Navbar.css";
 function App() {
   return <Layout />;
 }
-
 export default App;

@@ -37,13 +37,6 @@ width: 100%;
   font-size: 20px;
 }
 
-.btn-primary {
-  background-color:#BC6C25 ;
-  box-shadow: 0 4px 9px -4px #444444;
-}
-.btn-primary:hover{
-  background: black;
-}
 
 .select-choose{
   border-radius: 15px;

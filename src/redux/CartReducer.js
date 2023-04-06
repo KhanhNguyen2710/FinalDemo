@@ -1,7 +1,7 @@
 // rxslice
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
-  cartProduct: [],
+  cartProduct: [], // mãng
   totalAmount: 0,
   totalQuantity: 0,
 };
@@ -12,6 +12,7 @@ const CartReducer = createSlice({
   initialState,
   reducers: {
     addProduct: (state, action) => {
+      // console.log(action.payload);
       const newProduct = action.payload;
       const existingProduct = state.cartProduct.find(
         (product) => product.id === newProduct.id
