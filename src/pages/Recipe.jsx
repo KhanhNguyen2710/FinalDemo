@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useState } from 'react'
+import Helmet from '../components/Helmet/Helmet';
+import { Button, Col, Form, Modal, Row } from 'react-bootstrap';
+import { Input } from 'reactstrap';
+import RecipeAdd from '../components/recipe/RecipeAdd';
 
-function Recipe() {
+
+
+const Recipe = () => {
+  
+
   return (
-    <section>
-      <div>Recipe</div>;
-    </section>
+    <Helmet title="Recipe">
+     <RecipeAdd />
+    </Helmet>
   );
 }
 
-export default Recipe;
+export default Recipe
