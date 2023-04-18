@@ -55,6 +55,7 @@ const BlogAdd = () => {
     setPreview(URL.createObjectURL(file));
     setFile(file);
   };
+  
   return (
     <section>
       <div className="d-flex justify-content-center text-align-center">

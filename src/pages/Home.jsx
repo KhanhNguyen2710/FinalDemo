@@ -26,15 +26,21 @@ const Home = () => {
                   ipsum atque exercitationem ducimus quas at facere nihil!
                 </p>
                 <div className="content_btn d-flex align-items-center gap-5">
-                  <button
-                    className="start_btn d-flex align-items-center
+                  <Link to="/Recipe">
+                    <button
+                      className="start_btn d-flex align-items-center
                   justify-content-between"
-                  >
-                    Start now <i class="ri-arrow-right-s-line"></i>
-                  </button>
-                  <button className="all-recipe-btn ">
-                    <Link to="/Recipe">See recipe</Link>
-                  </button>
+                    >
+                      See recipe
+                      <i class="ri-arrow-right-s-line"></i>
+                      {/* Start now <i class="ri-arrow-right-s-line"></i> */}
+                    </button>
+                  </Link>
+                  {/* <button className="all-recipe-btn ">
+                    <Link to="/Recipe">
+                      See recipe <i class="ri-arrow-right-s-line"></i>
+                    </Link>
+                  </button> */}
                 </div>
               </div>
             </Col>
@@ -52,7 +58,7 @@ const Home = () => {
         </Container>
       </section>
       {/* ======================================Gallery=================================== */}
-    
+
       <section>
         <GalleryImgSection />
       </section>

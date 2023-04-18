@@ -1,0 +1,34 @@
+.recipe_Show{
+ 
+
+}
+.recipe_Card{
+  display: flex;
+  
+}
+.recipe_Details{
+  /* border: 2px solid rgb(92, 92, 92); */
+  margin: 20px;
+  margin-bottom: 40px;
+  padding: 15px;
+  background-color: #7c5532;
+  color: white;
+  border-radius: 10px;
+  /* box-shadow: 0 0 10px rgb(179, 179, 179); */
+   box-shadow: 5px 5px 5px rgb(138, 94, 36);
+}
+.recipe_Details.hidden {
+  display: none;
+}
+.recipe_Steps{
+  display: flex;
+/* flex-grow: 10px; */
+}
+@media only screen and (max-width: 768px) {
+  .recipe_Steps {
+    flex-direction: column;
+  }
+  .recipe_Card{
+  flex-direction: column;
+}
+}

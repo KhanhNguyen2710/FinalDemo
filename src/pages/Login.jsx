@@ -1,4 +1,4 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import {
   MDBBtn,
   MDBCheckbox,
@@ -14,14 +14,19 @@ import { Link, useNavigate } from "react-router-dom";
 import ".././styles/Register_Login.css";
 import Helmet from "../components/Helmet/Helmet";
 import { auth } from "../firebase";
+import ReactLoading from "react-loading";
 
 import Register_img from "../img/lycoffe.png";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { login } from "../redux/AuthReducer";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+   const dispatch = useDispatch();
 
   const signIn = async (e) => {
     e.preventDefault();
@@ -33,13 +38,24 @@ function Login() {
         email,
         password
       );
-
       const user = userCredential.user;
 
-      console.log(user);
+
+      // dispatch(
+      //   login({
+      //     email: user.email,
+      //     uid: user.uid,
+      //     displayName: user.username,
+      //     phone: user.phone,
+      //   })
+      // );
+      
+      console.log("User", user);
       setLoading(false);
-      navigate("/home");
+      toast.success("Login successfully");
+      // navigate("/home");
     } catch (error) {
+      toast.error(error.message);
       setLoading(false);
     }
   };
@@ -59,9 +75,7 @@ function Login() {
             {/* ============= lien ket ============= */}
 
             {loading ? (
-              <MDBCol lg="12" className="text-center">
-                <h5 className="fw-bold">loading.......</h5>
-              </MDBCol>
+              <ReactLoading type="spin" color="#bc6c25" />
             ) : (
               <MDBCol col="4" md="6">
                 <div className="Register_input">

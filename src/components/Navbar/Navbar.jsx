@@ -1,26 +1,52 @@
-import React, { useRef,useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Container } from "react-bootstrap";
-import { Link, NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "../../img/coffee-Logo.png";
 import "../Navbar/Navbar.css";
-import useAuth from "../../custom/useAuth"
-import "./Nav_links"
+import "./Nav_links";
 import Nav_links from "./Nav_links";
-import { useSelector } from "react-redux";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { toast } from "react-toastify";
+import UserInfo from "../../custom/UserInfo";
+
+
 
 
 const Navbar = () => {
-  const settings = ["Profile", "Account", "Dashboard", "Logout"];
   const menuRef = useRef(null);
+  const auth = getAuth();
   // const headerRef = useRef(null);
+  const [dropdown, setDropdown] = useState(false);
 
   const toggleMenu = () => menuRef.current.classList.toggle("show_menu");
+  const navigate = useNavigate();
 
-// const cartItems = useSelector((state) => state.cart.cartItems);
+  const menuDown = [
+    { display: "Profile", path: "/profile" },
+    { display: "Log Out", path: "/login" },
+  ];
+
+  // const cartItems = useSelector((state) => state.cart.cartItems);
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
+  // const { currentUser } = useAuth();
 
-const {currentUser} = useAuth() 
 
+  const handleDropdown = () => {
+    setDropdown(!dropdown);
+  };
+  const logout = () => {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        toast.success("Logout success")
+        navigate("/home")
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  }
+  
   return (
     <header className="header">
       <Container>
@@ -32,7 +58,7 @@ const {currentUser} = useAuth()
               <h5>Cup's Coffee</h5>
             </Link>
           </div>
-          {/* ============MENU ============ */}
+          {/* =================== MENU =================== */}
           <div className="navigation" ref={menuRef} onClick={toggleMenu}>
             <div className="menu d-flex align-items-center gap-5">
               {Nav_links.map((item, index) => (
@@ -57,24 +83,29 @@ const {currentUser} = useAuth()
                 <span className="cart_badge">{totalQuantity}</span>
               )}
             </span>
-
+            {/* =================== user =================== */}
             <div className="user">
-              <Link to="/login">
-                <i class="ri-user-line"></i>
-              </Link>
-              {/* <i class="ri-user-line"></i>
-              <div className="profile_actions">
-                {currentUser ? (
-                  <span>Logout</span>
-                ) : (
-                  <div>
-                    <Link to="/login">Login</Link>
-                    <Link to="/register">Login</Link>
-                  </div>
-                )}
-              </div> */}
+              <div
+                style={{ position: "relative", cursor: "pointer" }}
+                onClick={handleDropdown}
+              >
+                <i className="ri-user-line"></i>
+              </div>
+              {dropdown && (
+                <div className="dropdown">
+                  {menuDown.map((menu) => (
+                    <div
+                      className="menuDown"
+                      onClick={() => navigate(menu.path)}
+                    >
+                      {menu.display}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
-
+           
+           
             <span className="mobile_menu" onClick={toggleMenu}>
               <i class="ri-menu-line"></i>
             </span>

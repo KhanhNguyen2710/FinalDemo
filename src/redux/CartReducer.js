@@ -12,19 +12,18 @@ const CartReducer = createSlice({
   initialState,
   reducers: {
     addProduct: (state, action) => {
-      // console.log(action.payload);
       const newProduct = action.payload;
       const existingProduct = state.cartProduct.find(
         (product) => product.id === newProduct.id
       );
-
+      // so luong
       state.totalQuantity++;
 
       if (!existingProduct) {
         state.cartProduct.push({
           id: newProduct.id,
           productName: newProduct.productName,
-          image: newProduct.img,
+          img: newProduct.img,
           quantity: 1,
           totalPrice: newProduct.price,
         });
@@ -33,14 +32,42 @@ const CartReducer = createSlice({
         existingProduct.totalPrice =
           Number(existingProduct.totalPrice) + Number(newProduct.price);
       }
+
+      // TODO: fix // fix done // 
       state.totalAmount = state.cartProduct.reduce(
         (total, product) =>
-          total + Number(product.price) * Number(product.quantity)
+          total + Number(product.totalPrice) * Number(product.quantity),
+        0
       );
 
       console.log(state.totalQuantity);
-      console.log(state.cartProduct);
       console.log(newProduct);
+      console.log("total", state.totalAmount);
+      console.table("all", state.cartProduct);
+    },
+
+    removeProduct: (state, action) => {
+      const productId = action.payload;
+      
+      const existingProduct = state.cartProduct.find(
+        (product) => product.id === productId
+        
+      );console.log("removeProduct", existingProduct);
+      if (existingProduct) {
+        if (existingProduct.quantity === 1) {
+        // Nếu sản phẩm chỉ còn 1 thì xoá 
+          state.cartProduct = state.cartProduct.filter(
+          (product) => product.id !== productId
+          );
+        } else {
+          // Nếu sản phẩm còn nhiều hơn 1 thì giảm số lượng đi 1
+          existingProduct.quantity--;
+          existingProduct.totalPrice -= existingProduct.price;
+        }
+      }
+      state.totalQuantity--;
+      state.totalAmount -= existingProduct.price * existingProduct.quantity;
+
     },
   },
 });

@@ -1,19 +1,17 @@
-import React, { useState } from 'react'
-import Helmet from '../components/Helmet/Helmet';
-import { Button, Col, Form, Modal, Row } from 'react-bootstrap';
-import { Input } from 'reactstrap';
-import RecipeAdd from '../components/recipe/RecipeAdd';
-
-
+import React from "react";
+import Helmet from "../components/Helmet/Helmet";
+import RecipeTest from "../components/recipe/RecipeTest";
+import RecipeAdd from "../components/recipe/recipeAdd/RecipeAdd";
+import RecipeShow from "../components/recipe/recipeShow/RecipeShow";
 
 const Recipe = () => {
-  
-
   return (
     <Helmet title="Recipe">
-     <RecipeAdd />
+      <RecipeAdd />
+      {/* <RecipeTest /> */}
+      <RecipeShow />
     </Helmet>
   );
-}
+};
 
-export default Recipe
+export default Recipe;

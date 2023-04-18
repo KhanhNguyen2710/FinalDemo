@@ -82,6 +82,32 @@
   align-items: center;
   justify-content: center;
 }
+
+ .dropdown {
+    position: absolute;
+    top: 75px;
+    right: 100px;
+    background-color: #283618;
+    border: 1px solid #ccc;
+    z-index: 1;
+    cursor: pointer;
+    color: white;
+    border-radius:5px;
+  }
+.menuDown {
+  padding: 0px 20px 0px 20px;
+  border-radius:5px;
+  cursor: pointer;
+ 
+}
+
+.menuDown:hover {
+  
+  color: #fff;
+  background-color: #415727;
+  
+}
+
 @media only screen and (max-width: 992px) {
   .logo img {
     width: calc(100% - 70%);
@@ -127,6 +153,11 @@
   .show_menu {
     display: block;
   }
+
+
+ 
+
+
 }
 @media only screen and (max-width: 768px) {
 }

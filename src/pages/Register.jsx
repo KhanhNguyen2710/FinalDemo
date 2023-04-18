@@ -1,5 +1,6 @@
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
+
 import {
   MDBBtn,
   MDBCol,
@@ -10,7 +11,8 @@ import {
 
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import ".././styles/Register_Login.css";
 import Helmet from "../components/Helmet/Helmet";
@@ -24,30 +26,31 @@ function Register() {
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const navigate = useNavigate();
+
   const register = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    // setLoading(true);
 
     try {
-      
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
-        password,
-        
+        password
       );
       const user = userCredential.user;
 
       // add to firestore
       await setDoc(doc(db, "user", user.uid), {
         uid: user.uid,
-        displayName: username,
+        username: username,
         email: email,
         phone: phone,
         password: password,
       });
-
+      console.log("register successfully");
       console.log(user);
+      navigate("/login");
     } catch (error) {
       toast.error("wrong");
     }
@@ -77,6 +80,7 @@ function Register() {
                     type="text"
                     size="lg"
                     value={username}
+                    required
                     onChange={(e) => setUsername(e.target.value)}
                   />
 
@@ -85,6 +89,7 @@ function Register() {
                     label="Email address"
                     type="email" // @gmail.com
                     size="lg"
+                    required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
@@ -95,6 +100,7 @@ function Register() {
                     type="number" //
                     size="lg"
                     min="0"
+                    required
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                   />
@@ -104,6 +110,7 @@ function Register() {
                     label="Password"
                     // type="password"// ẩn
                     size="lg"
+                    required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
@@ -114,7 +121,7 @@ function Register() {
                       className="submit-btn mb-0 px-5"
                       size="lg"
                     >
-                      <Link to="/login"> Sign up </Link>
+                      Sign Up
                     </MDBBtn>
                   </div>
                 </Form>
