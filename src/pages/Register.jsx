@@ -39,11 +39,12 @@ function Register() {
         password
       );
       const user = userCredential.user;
+      
 
       // add to firestore
       await setDoc(doc(db, "user", user.uid), {
         uid: user.uid,
-        username: username,
+        displayName: username,
         email: email,
         phone: phone,
         password: password,

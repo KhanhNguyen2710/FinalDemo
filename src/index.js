@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Store, { Auth } from "./redux/Store";
+import Store from "./redux/Store";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
@@ -22,7 +22,7 @@ root.render(
         <Provider store={Store}>
           <ToastContainer
             position="top-center"
-            autoClose={500}
+            autoClose={1500}
             closeOnClick
             draggable
             theme="dark"

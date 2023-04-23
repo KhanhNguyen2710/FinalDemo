@@ -1,52 +1,80 @@
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import React, { useEffect, useRef, useState } from "react";
-import { Container } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import logo from "../../img/coffee-Logo.png";
+import { AuthLogin, AuthLogout, authLogin, authLogout, login } from "../../redux/AuthReducer";
 import "../Navbar/Navbar.css";
 import "./Nav_links";
 import Nav_links from "./Nav_links";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import { toast } from "react-toastify";
-import UserInfo from "../../custom/UserInfo";
-
-
-
+import Ava from "../../img/Ava.jpg"
 
 const Navbar = () => {
   const menuRef = useRef(null);
   const auth = getAuth();
-  // const headerRef = useRef(null);
   const [dropdown, setDropdown] = useState(false);
 
   const toggleMenu = () => menuRef.current.classList.toggle("show_menu");
   const navigate = useNavigate();
 
-  const menuDown = [
-    { display: "Profile", path: "/profile" },
-    { display: "Log Out", path: "/login" },
-  ];
-
-  // const cartItems = useSelector((state) => state.cart.cartItems);
+  const dispatch = useDispatch();
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
-  // const { currentUser } = useAuth();
-
 
   const handleDropdown = () => {
     setDropdown(!dropdown);
   };
+  //
   const logout = () => {
     signOut(auth)
       .then(() => {
-        // Sign-out successful.
-        toast.success("Logout success")
-        navigate("/home")
+        navigate("/");
+        toast.success("Logout success");
+        navigate("/home");
       })
       .catch((error) => {
-        // An error happened.
+        toast.error("Logout error");
       });
-  }
+  };
+  const menuDown = [
+    { display: "Profile", path: "/profile" },
+    { display: "Log Out", onClick: logout },
+  ];
+
+  const [displayAccount, setDisplayAccount] = useState("");
   
+  // const [displayName, setDisplayName] = useState("");
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // user google
+        // console.log("name", user);
+        // if (user.displayName == null) {
+        //   const u1 = user.email.substring(0,user.email.indexOf("@"));
+        //   const uName = u1.charAt(0).toUpperCase() + u1.slice(1);
+        //   // console.log("n", uName);
+        //   setDisplayAccount(uName);
+        // } else {
+        //    setDisplayAccount(user);
+        // }
+        setDisplayAccount(user);
+        dispatch(
+          authLogin({
+            email: user.email,
+            userName: user.displayName, //? user.displayName : displayAccount,
+            userID: user.uid,
+            photoURL: user.photoURL,
+          })
+        );
+      } else {
+        setDisplayAccount("");
+        dispatch(authLogout());
+      }
+    });
+  }, []);
+
   return (
     <header className="header">
       <Container>
@@ -84,30 +112,58 @@ const Navbar = () => {
               )}
             </span>
             {/* =================== user =================== */}
-            <div className="user">
-              <div
-                style={{ position: "relative", cursor: "pointer" }}
-                onClick={handleDropdown}
-              >
-                <i className="ri-user-line"></i>
-              </div>
-              {dropdown && (
-                <div className="dropdown">
-                  {menuDown.map((menu) => (
-                    <div
-                      className="menuDown"
-                      onClick={() => navigate(menu.path)}
-                    >
-                      {menu.display}
-                    </div>
-                  ))}
+            {displayAccount ? (
+              <div className="user">
+                <div
+                  style={{ position: "relative", cursor: "pointer" }}
+                  onClick={handleDropdown}
+                >
+                  {/* <i className="ri-user-line">Hi, {displayAccount} </i> */}
+                  <img
+                    style={{
+                      height: "40px",
+                      width: "40px",
+                      borderRadius: "50%",
+                      border: "1px solid black",
+                    }}
+                    src={displayAccount.photoURL || Ava}
+                    alt=""
+                  />
+                  {/* {displayAccount.displayName}  */}
                 </div>
-              )}
-            </div>
-           
-           
+                {dropdown && (
+                  <div className="dropdown">
+                    {menuDown.map((menu, index) => (
+                      <div
+                        className="menuDown"
+                        onClick={() => {
+                          if (menu.onClick) {
+                            menu.onClick();
+                          } else {
+                            navigate(menu.path);
+                          }
+                        }}
+                        key={index}
+                      >
+                        {menu.display}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <span className="cart_icon">
+                <Link to="/login">
+                  <i className="ri-user-line"></i>
+                </Link>
+              </span>
+            )}
             <span className="mobile_menu" onClick={toggleMenu}>
-              <i class="ri-menu-line"></i>
+              <Link to="/login">
+                <Button>
+                  <i class="ri-menu-line"></i>
+                </Button>
+              </Link>
             </span>
           </div>
         </div>

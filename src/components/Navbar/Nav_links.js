@@ -1,6 +1,7 @@
 import React from 'react'
 
- const Nav_links = [
+
+export const Nav_links = [
   {
     display: "Home",
     path: "/home",

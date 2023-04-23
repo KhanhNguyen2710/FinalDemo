@@ -8,13 +8,13 @@ const UserInfo = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // User is signed in, see docs for a list of available properties
-        setCurrentUser(user);
+        const uid = user.uid;
+        setCurrentUser(user.username);
 
         // ...
       } else {
         // User is signed out
-        setCurrentUser(null);
+        setCurrentUser("");
       }
     });
   });

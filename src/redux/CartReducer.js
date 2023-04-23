@@ -16,9 +16,7 @@ const CartReducer = createSlice({
       const existingProduct = state.cartProduct.find(
         (product) => product.id === newProduct.id
       );
-      // so luong
-      state.totalQuantity++;
-
+      state.totalQuantity++; // Quantity
       if (!existingProduct) {
         state.cartProduct.push({
           id: newProduct.id,

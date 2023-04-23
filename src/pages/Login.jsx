@@ -1,4 +1,8 @@
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
 import {
   MDBBtn,
   MDBCheckbox,
@@ -10,23 +14,22 @@ import {
 } from "mdb-react-ui-kit";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import React, { useState } from "react";
+import ReactLoading from "react-loading";
 import { Link, useNavigate } from "react-router-dom";
 import ".././styles/Register_Login.css";
 import Helmet from "../components/Helmet/Helmet";
 import { auth } from "../firebase";
-import ReactLoading from "react-loading";
 
-import Register_img from "../img/lycoffe.png";
-import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
-import { login } from "../redux/AuthReducer";
+import { toast } from "react-toastify";
+import Register_img from "../img/lycoffe.png";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-   const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const signIn = async (e) => {
     e.preventDefault();
@@ -39,25 +42,28 @@ function Login() {
         password
       );
       const user = userCredential.user;
-
-
-      // dispatch(
-      //   login({
-      //     email: user.email,
-      //     uid: user.uid,
-      //     displayName: user.username,
-      //     phone: user.phone,
-      //   })
-      // );
-      
       console.log("User", user);
+  
       setLoading(false);
       toast.success("Login successfully");
-      // navigate("/home");
+      navigate("/home");
     } catch (error) {
       toast.error(error.message);
       setLoading(false);
     }
+  };
+
+  const provider = new GoogleAuthProvider();
+  const signInWithGoogle = (e) => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // const user = result.user;
+        toast.success("Login successfully")
+        navigate("/home")
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   };
 
   return (
@@ -80,19 +86,17 @@ function Login() {
               <MDBCol col="4" md="6">
                 <div className="Register_input">
                   <div className=" d-flex flex-row align-items-center justify-content-center ">
-                    <p className="lead fw-normal mb-0 me-3">Sign in with</p>
+                    <p className="lead fw-normal mb-0 me-3">Sign in with :</p>
 
                     <MDBBtn floating size="md" tag="a" className=" me-2">
-                      <MDBIcon fab icon="facebook-f" className="icon" />
+                      <MDBIcon
+                        fab
+                        icon="google"
+                        className="icon"
+                        onClick={signInWithGoogle}
+                      />
                     </MDBBtn>
 
-                    <MDBBtn floating size="md" tag="a" className=" me-2">
-                      <MDBIcon fab icon="twitter" className="icon" />
-                    </MDBBtn>
-
-                    <MDBBtn floating size="md" tag="a" className=" me-2">
-                      <MDBIcon fab icon="linkedin-in" className="icon" />
-                    </MDBBtn>
                   </div>
                   {/* ============= Input ============= */}
                   <div className="divider d-flex align-items-center my-4">
@@ -140,6 +144,14 @@ function Login() {
                       </p>
                     </div>
                   </form>
+                  {/* <MDBBtn
+                    type="submit"
+                    className="submit-btn mb-0 px-5"
+                    size="lg"
+                    onClick={signInWithGoogle}
+                  >
+                    Login with GG
+                  </MDBBtn> */}
                 </div>
               </MDBCol>
             )}
