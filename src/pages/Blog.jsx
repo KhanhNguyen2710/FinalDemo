@@ -14,7 +14,7 @@ const Blog = () => {
   return (
     <Helmet title="Blog">
       <BlogAdd />
-      {/* =========================== show =========================== */}
+      {/* ===== SHOW ===== */}
       <section>
         <BlogShow />
       </section>

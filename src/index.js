@@ -18,8 +18,8 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      {/* <Provider store={Auth}> */}
-        <Provider store={Store}>
+      <Provider store={Store}>
+        
           <ToastContainer
             position="top-center"
             autoClose={1500}
@@ -29,7 +29,6 @@ root.render(
           />
           <App />
         </Provider>
-      {/* </Provider> */}
     </BrowserRouter>
   </React.StrictMode>
 );

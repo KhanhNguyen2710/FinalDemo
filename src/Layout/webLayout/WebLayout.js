@@ -1,23 +1,20 @@
 import React from "react";
 //import Body from './Body';
+import Navbar from "../../components/Navbar/Navbar.jsx";
+import Footer from "../../components/footer/Footer.jsx";
 import Router from "../../routers/Routers.js";
-import Footer from "../footer/Footer";
-import Navbar from "../Navbar/Navbar.jsx";
-import "./Layout.css"
+import "./WebLayout.css";
 
-const Layout = () => {
+const WebLayout = () => {
   return (
     <div>
-      
-        <Navbar />
-     
+      <Navbar />
       <div className="router">
         <Router />
       </div>
-
       <Footer />
     </div>
   );
 };
 
-export default Layout;
+export default WebLayout;

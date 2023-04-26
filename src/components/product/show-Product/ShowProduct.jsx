@@ -50,7 +50,7 @@ const ShowProduct = () => {
             >
               <h4>{product.productName}</h4>
             </Link>
-            <Card.Text> {product.price + "$"}</Card.Text>
+            <Card.Text style={{color:"white"}}> {product.price + "$"}</Card.Text>
             <Button
               onClick={() =>
                 dispatch(

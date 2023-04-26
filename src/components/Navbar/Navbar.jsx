@@ -4,12 +4,14 @@ import { Button, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import AdminRoute from "../../Admin/AdminHide";
+import Ava from "../../img/Ava.jpg";
 import logo from "../../img/coffee-Logo.png";
-import { AuthLogin, AuthLogout, authLogin, authLogout, login } from "../../redux/AuthReducer";
+import { authLogin, authLogout } from "../../redux/AuthReducer";
 import "../Navbar/Navbar.css";
 import "./Nav_links";
 import Nav_links from "./Nav_links";
-import Ava from "../../img/Ava.jpg"
+import AdminHide from "../../Admin/AdminHide";
 
 const Navbar = () => {
   const menuRef = useRef(null);
@@ -39,11 +41,12 @@ const Navbar = () => {
   };
   const menuDown = [
     { display: "Profile", path: "/profile" },
+    { display: "Admin", path: "/admin", component: AdminHide },
     { display: "Log Out", onClick: logout },
   ];
 
   const [displayAccount, setDisplayAccount] = useState("");
-  
+
   // const [displayName, setDisplayName] = useState("");
 
   useEffect(() => {
@@ -82,7 +85,6 @@ const Navbar = () => {
           <div className="logo">
             <Link to="/home">
               <img src={logo} alt="logo" />
-
               <h5>Cup's Coffee</h5>
             </Link>
           </div>
@@ -106,11 +108,14 @@ const Navbar = () => {
           {/* ============ right ============ */}
           <div className="nav_right d-flex align-items-center gap-4">
             <span className="cart_icon">
-              <i class="ri-shopping-bag-2-line"></i>
-              {totalQuantity !== 0 && (
-                <span className="cart_badge">{totalQuantity}</span>
-              )}
+              <Link to="/cart">
+                <i class="ri-shopping-bag-2-line"></i>
+                {totalQuantity !== 0 && (
+                  <span className="cart_badge">{totalQuantity}</span>
+                )}
+              </Link>
             </span>
+
             {/* =================== user =================== */}
             {displayAccount ? (
               <div className="user">
@@ -138,14 +143,21 @@ const Navbar = () => {
                         className="menuDown"
                         onClick={() => {
                           if (menu.onClick) {
+                            //onClick: logOut
                             menu.onClick();
+                          } else if (menu.component) {
+                            //AdminRoute
+                            navigate(menu.path);
                           } else {
                             navigate(menu.path);
                           }
                         }}
-                        key={index}
                       >
-                        {menu.display}
+                        {menu.component ? (
+                          <menu.component>{menu.display}</menu.component> // Sử dụng component
+                        ) : (
+                          menu.display // display bình thường
+                        )}
                       </div>
                     ))}
                   </div>

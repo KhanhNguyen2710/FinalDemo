@@ -1,6 +1,3 @@
-import React from 'react'
-
-
 export const Nav_links = [
   {
     display: "Home",
@@ -18,10 +15,11 @@ export const Nav_links = [
     display: "Blogs",
     path: "/blog",
   },
-  {
-    display: "Cart",
-    path: "/cart",
-  },
+
+  // {
+  //   display: "Cart",
+  //   path: "/cart",
+  // },
 ];
 
-export default Nav_links
+export default Nav_links;

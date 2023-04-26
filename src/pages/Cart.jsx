@@ -93,8 +93,6 @@ function Cart() {
                     </tr>
                   </MDBTableBody>
                 ))}
-
-                {/* ======================================================== */}
               </MDBTable>
             </MDBCard>
           </Col>
@@ -126,7 +124,6 @@ function Cart() {
                     </span>
                   </MDBListGroupItem>
                 </MDBListGroup>
-
                 <MDBBtn block size="lg">
                   Go to checkout
                 </MDBBtn>

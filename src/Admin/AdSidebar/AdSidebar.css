@@ -1,0 +1,11 @@
+.sidebar {
+  background-color: #bc6c25;
+}
+.sidebar-item:hover{
+  background: #606c38;
+  color: #fefae0;
+}
+.sidebar-active {
+  background-color: #606c38;
+}
+

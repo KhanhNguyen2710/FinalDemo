@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const AuthReducer = createSlice({
   name: "auth",
-  
+
   initialState: {
     isAuthenticated: false,
     userName: null,
@@ -32,13 +32,12 @@ const AuthReducer = createSlice({
   },
 });
 
-export const { authLogin, authLogout } = AuthReducer.actions; 
+export const { authLogin, authLogout } = AuthReducer.actions;
 
-export const LoggedIn = (state) => state.auth.isAuthenticated;
+export const Authenticated = (state) => state.auth.isAuthenticated;
 export const AuthEmail = (state) => state.auth.email;
 export const AuthUserName = (state) => state.auth.userName;
 export const AuthUid = (state) => state.auth.uid;
 export const AuthPhone = (state) => state.auth.phone;
-
 
 export default AuthReducer.reducer;

@@ -5,7 +5,7 @@ import InfoProduct from '../components/productDetail/InfoProduct';
 
 const ProductDetail = () => {
   return (
-    <div  >
+    <div>
       <InfoProduct/>
     </div>
   );
