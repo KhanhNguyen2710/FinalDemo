@@ -1,0 +1,25 @@
+/* 
+.sidebar:hover{
+  background: #606c38;
+  color: #fefae0;
+} */
+
+.sidebar-item{
+  height: 70px;
+
+}
+.sidebar_btn{
+  margin: 100px;
+}
+.no-hover:hover {
+  pointer-events: none;
+}
+
+.sidebar-item:hover{
+  background: #606c38;
+  color: #fefae0;
+}
+.sidebar-active {
+  background-color: #606c38;
+  color: #fefae0;
+}

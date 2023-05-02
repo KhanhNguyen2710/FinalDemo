@@ -4,8 +4,6 @@ import AddProduct from "../components/product/add-Product/AddProduct";
 import Blog from "../pages/Blog";
 import Cart from "../pages/Cart.jsx";
 
-import { ManagerAcc } from "../Admin/AdPages/ManagerAcc";
-import AdminPage from "../Layout/adLayout/AdminPage";
 import Home from "../pages/Home.jsx";
 import Login from "../pages/Login.jsx";
 import Product from "../pages/Product";
@@ -13,13 +11,22 @@ import ProductDetail from "../pages/ProductDetail";
 import Profile from "../pages/Profile";
 import Recipe from "../pages/Recipe.jsx";
 import Register from "../pages/Register.jsx";
+import Admin from "../Admin/Admin";
+import AdminOnly from "../Admin/AdminOnly";
+import AdRouters from "./AdRouters";
 
 const Routers = () => {
   return (
     <Routes>
-      {/* user */}
-      <Route path="/" element={<Navigate to="/home" />} />
-      <Route path="/home" element={<Home />} />
+      <Route path="/" element={<Home/>} />
+      <Route
+        path="/home"
+        element={
+          // <ProtectedRoute>
+          <Home />
+          // </ProtectedRoute>
+        }
+      />
       <Route path="/cart" element={<Cart />} />
       <Route path="/product" element={<Product />} />
       <Route path="/addProduct" element={<AddProduct />} />
@@ -29,9 +36,16 @@ const Routers = () => {
       <Route path="/blog" element={<Blog />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      {/* admin */}
-      <Route path="/admin" element={<AdminPage />} />
-      {/* <Route path="/managerAcc" element={<ManagerAcc />} /> */}
+
+      {/* ADMIN */}
+      <Route
+        path="/admin/*"
+        element={
+          <AdminOnly>
+            <AdRouters />
+          </AdminOnly>
+        }
+      />
     </Routes>
   );
 };

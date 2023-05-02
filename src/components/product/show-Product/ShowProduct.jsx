@@ -24,6 +24,8 @@ const ShowProduct = () => {
     };
     getData();
   }, []);
+
+  
  const cartProduct = useSelector((state) => state.cart.cartProduct);
   console.log("cartProduct", cartProduct);
   

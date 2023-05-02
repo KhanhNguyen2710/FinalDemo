@@ -5,7 +5,6 @@ import {
 } from "firebase/auth";
 import {
   MDBBtn,
-  MDBCheckbox,
   MDBCol,
   MDBContainer,
   MDBIcon,
@@ -43,10 +42,15 @@ function Login() {
       );
       const user = userCredential.user;
       console.log("User", user);
-  
+
       setLoading(false);
       toast.success("Login successfully");
-      navigate("/home");
+
+      if (user && user.email === "khanh@test.com") {
+        navigate("/admin/managerAccount");
+      } else {
+        navigate("/home");
+      }
     } catch (error) {
       toast.error(error.message);
       setLoading(false);
@@ -58,8 +62,8 @@ function Login() {
     signInWithPopup(auth, provider)
       .then((result) => {
         // const user = result.user;
-        toast.success("Login successfully")
-        navigate("/home")
+        toast.success("Login successfully");
+        navigate("/home");
       })
       .catch((error) => {
         toast.error(error.message);
@@ -96,7 +100,6 @@ function Login() {
                         onClick={signInWithGoogle}
                       />
                     </MDBBtn>
-
                   </div>
                   {/* ============= Input ============= */}
                   <div className="divider d-flex align-items-center my-4">

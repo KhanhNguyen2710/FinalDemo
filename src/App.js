@@ -5,11 +5,11 @@ import "react-toastify/dist/ReactToastify.css";
 import "remixicon/fonts/remixicon.css";
 import "./App.css";
 
+import Layout from "./Layout/Layout";
 import "./components/Navbar/Navbar.css";
 import "./styles/Body.css";
-import Layout from "./Layout/Layout";
 
 function App() {
-  return <Layout/>;
+  return <Layout />;
 }
 export default App;
