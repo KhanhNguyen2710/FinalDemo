@@ -8,12 +8,18 @@ import Helmet from "../components/Helmet/Helmet";
 import { db, storage } from "../firebase";
 import "../styles/Blog.css";
 import BlogAdd from "../components/blog/blogAdd/BlogAdd";
+import UserOnly from "../components/userOnly/UserOnly";
 
 const Blog = () => {
 
   return (
     <Helmet title="Blog">
-      <BlogAdd />
+      <UserOnly>
+        <div style={{ marginTop: "140px" }}>
+          <BlogAdd />
+        </div>
+      </UserOnly>
+
       {/* ===== SHOW ===== */}
       <section>
         <BlogShow />

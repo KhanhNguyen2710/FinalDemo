@@ -35,15 +35,22 @@ const ShowProduct = () => {
     <div className=" show-Product gap-3">
       {productList.map((product, index) => (
         <Card className="product-item" style={{ width: "15rem" }}>
-          <Card.Img
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-            }}
-            variant="top"
-            src={product.img}
-          />
+          <Link
+            to={`/productDetail/${product.id}`}
+            state={{ product }}
+            key={index}
+          >
+            <Card.Img
+              style={{
+                width: "100%",
+                height: "200px",
+                cursor: "pointer",
+                objectFit: "cover",
+              }}
+              variant="top"
+              src={product.img}
+            />
+          </Link>
           <Card.Body className="product-item-body">
             <Link
               to={`/productDetail/${product.id}`}
@@ -52,21 +59,26 @@ const ShowProduct = () => {
             >
               <h4>{product.productName}</h4>
             </Link>
-            <Card.Text style={{color:"white"}}> {product.price + "$"}</Card.Text>
-            <Button
-              onClick={() =>
-                dispatch(
-                  cartActions.addProduct({
-                    id: product.id,
-                    productName: product.productName,
-                    img: product.img,
-                    price: product.price,
-                  })
-                )
-              }
-            >
-              Add to Cart
-            </Button>
+            <Card.Text style={{ color: "#666666" }}>
+              {" "}
+              {product.price + " $"}
+            </Card.Text>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <Button
+                onClick={() =>
+                  dispatch(
+                    cartActions.addProduct({
+                      id: product.id,
+                      productName: product.productName,
+                      img: product.img,
+                      price: product.price,
+                    })
+                  )
+                }
+              >
+                Add to Cart
+              </Button>
+            </div>
           </Card.Body>
         </Card>
       ))}

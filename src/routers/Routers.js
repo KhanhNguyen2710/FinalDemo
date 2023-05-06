@@ -14,11 +14,12 @@ import Register from "../pages/Register.jsx";
 import Admin from "../Admin/Admin";
 import AdminOnly from "../Admin/AdminOnly";
 import AdRouters from "./AdRouters";
+import BlogAdd from "../components/blog/blogAdd/BlogAdd";
 
 const Routers = () => {
   return (
     <Routes>
-      <Route path="/" element={<Home/>} />
+      <Route path="/" element={<Home />} />
       <Route
         path="/home"
         element={
@@ -29,7 +30,7 @@ const Routers = () => {
       />
       <Route path="/cart" element={<Cart />} />
       <Route path="/product" element={<Product />} />
-      <Route path="/addProduct" element={<AddProduct />} />
+      {/* <Route path="/addProduct" element={<AddProduct />} /> */}
       <Route path="/productDetail/:id" element={<ProductDetail />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/recipe" element={<Recipe />} />

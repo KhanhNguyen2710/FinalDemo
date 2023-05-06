@@ -23,11 +23,10 @@
   height: 100px;
   line-height: 80px;
   position: fixed;
-  background: #fefae0f3;
+  background: rgba(255, 255, 255, 0.966);
   top: 0;
-
   /* margin-top: 10px; */
-
+  border-bottom: 1px solid #b6b6b65d;
   z-index: 999;
 }
 .menu a {
@@ -45,7 +44,7 @@
   color: #283618 !important;
 }
 
-.cart_icon i,
+.right_icon i,
 .user i,
 .mobile_menu,
 .profile {
@@ -57,7 +56,7 @@
   display: none;
   font-weight: 600;
 }
-.cart_icon {
+.right_icon {
   position: relative;
 }
 .header_sticky {
@@ -130,7 +129,7 @@
     right: 0;
     width: 250px;
     height: 100%;
-    background: rgba(255, 255, 255, 0.432);
+    background: rgba(255, 255, 255, 0.74);
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -139,14 +138,18 @@
   }
   .menu a {
     font-family: 0.9rem;
+   
+        
   }
   .mobile_menu {
     display: block;
+     line-height: 0px;
   }
-  .cart_icon i,
+  .right_icon i,
   .user i,
   .mobile_menu {
-    font-size: 1rem;
+    font-size: 1.4rem;
+    
   }
   .show_menu {
     display: block;

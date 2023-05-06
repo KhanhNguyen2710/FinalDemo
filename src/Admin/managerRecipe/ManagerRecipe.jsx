@@ -1,42 +1,45 @@
-import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
-import { Pagination, Table } from "react-bootstrap";
-import { toast } from "react-toastify";
-import { db } from "../../firebase";
+import { collection, deleteDoc, doc, getDocs } from 'firebase/firestore';
+import React, { useEffect, useState } from 'react'
+import { Pagination, Table } from 'react-bootstrap';
+import { db } from '../../firebase';
+import { toast } from 'react-toastify';
 
-const ManagerAccount = () => {
-  const [userList, setUserList] = useState([]);
+const ManagerRecipe = () => {
 
-  useEffect(() => {
-    const getData = async () => {
-      let data = [];
-      const querySnapshot = await getDocs(collection(db, "user"));
-      querySnapshot.forEach((doc) => {
-        data.push({ id: doc.id, ...doc.data() });
-        console.log(doc.id, " => ", doc.data());
-      });
-      setUserList(data);
-    };
-    getData();
-  }, []);
+  const [recipeList, setRecipeListList] = useState([]);
+
+ useEffect(() => {
+   const getData = async () => {
+     let data = [];
+     const querySnapshot = await getDocs(collection(db, "recipes"));
+     querySnapshot.forEach((doc) => {
+       data.push({ id: doc.id, ...doc.data() });
+       console.log(doc.id, " => ", doc.data());
+     });
+     setRecipeListList(data);
+   };
+   getData();
+ }, []);
+
 
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage, setProductsPerPage] = useState(5);
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentUser = userList.slice(indexOfFirstProduct, indexOfLastProduct);
+  const currentRecipe = recipeList.slice(indexOfFirstProduct, indexOfLastProduct);
   const pageNumbers = [];
-  
-  for (let i = 1; i <= Math.ceil(userList.length / productsPerPage); i++) {
+
+  for (let i = 1; i <= Math.ceil(recipeList.length / productsPerPage); i++) {
     pageNumbers.push(i);
   }
 
-  const handleDelete = async (userID) => {
-    await deleteDoc(doc(db, "user", userID));
-    setUserList((prevState) => prevState.filter((user) => user.id !== userID));
-    toast.success("complete delete");
-  };
+   const handleDelete = async (userID) => {
+     await deleteDoc(doc(db, "user", userID));
+     setRecipeListList((prevState) => prevState.filter((user) => user.id !== userID));
+     toast.success("complete delete");
+   };
+
 
   return (
     <>
@@ -52,7 +55,7 @@ const ManagerAccount = () => {
           </tr>
         </thead>
         <tbody>
-          {currentUser.map((item, index) => (
+          {currentRecipe.map((item, index) => (
             <tr>
               <td>{indexOfFirstProduct + index + 1}</td>
               <td>{item.displayName}</td>
@@ -87,6 +90,6 @@ const ManagerAccount = () => {
       </Pagination>
     </>
   );
-};
+}
 
-export default ManagerAccount;
+export default ManagerRecipe

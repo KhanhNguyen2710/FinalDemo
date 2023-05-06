@@ -15,13 +15,20 @@ function Cart() {
   const totalAmount = useSelector((state) => state.cart.totalAmount);
   console.log("show--", totalAmount);
   
+
+
+
+  
   const dispatch = useDispatch();
+
+
+
 
   const handleDelete = (productId) => {
     dispatch(cartActions.removeProduct(productId));
   };
   return (
-    <section className="h-100 gradient-custom">
+    <div className="h-100 gradient-custom">
       <Container className="py-5 h-100">
         <Row className="justify-content-center my-4">
           <Col md="8">
@@ -61,7 +68,13 @@ function Cart() {
                       {/* ======================= quantity ======================= */}
                       <td className="align-middle">
                         <div class="d-flex flex-row align-items-center">
-                          <MDBBtn className="px-2" color="link">
+                          <MDBBtn
+                            className="px-2"
+                            color="link"
+                            onClick={() =>
+                              dispatch(cartActions.decreaseQuantity(item.id))
+                            }
+                          >
                             <MDBIcon fas icon="minus" />
                           </MDBBtn>
 
@@ -70,9 +83,15 @@ function Cart() {
                             type="number"
                             size="sm"
                             style={{ width: "50px" }}
-                            defaultValue={item.quantity}
+                            value={item.quantity}
                           />
-                          <MDBBtn className="px-2" color="link">
+                          <MDBBtn
+                            className="px-2"
+                            color="link"
+                            onClick={() =>
+                              dispatch(cartActions.increaseQuantity(item.id))
+                            }
+                          >
                             <MDBIcon fas icon="plus" />
                           </MDBBtn>
                         </div>
@@ -80,7 +99,7 @@ function Cart() {
                       {/* ======================= total Price ======================= */}
                       <td className="align-middle">
                         <p className="mb-0" style={{ fontWeight: "500" }}>
-                          {item.totalPrice} $
+                          {item.totalPrice * item.quantity} $
                         </p>
                       </td>
 
@@ -132,7 +151,7 @@ function Cart() {
           </Col>
         </Row>
       </Container>
-    </section>
+    </div>
   );
 }
 

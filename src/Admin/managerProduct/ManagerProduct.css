@@ -1,3 +1,39 @@
 .fa-trash {
   color: red;
+  cursor: pointer;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination li {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.pagination li a,
+.pagination li span {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  color: #ffffff;
+  background-color: #547949;
+}
+
+.pagination li a:hover,
+.pagination li a:focus,
+.pagination li.active a {
+  background-color: #b48d3a;
+  border-color: #a17a26;
+  color: #fff;
+}
+
+.pagination li.disabled a,
+.pagination li.disabled span {
+  color: #cccccc;
+  pointer-events: none;
+  background-color: #fff;
+  border-color: #ccc;
 }

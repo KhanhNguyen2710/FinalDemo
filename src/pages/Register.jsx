@@ -48,10 +48,11 @@ function Register() {
         email: email,
         phone: phone,
         password: password,
+        photoURL:"",
       });
       console.log("register successfully");
       console.log(user);
-      navigate("/login");
+      navigate("/home");
     } catch (error) {
       toast.error("wrong");
     }
@@ -109,7 +110,7 @@ function Register() {
                   <MDBInput
                     className="Input mb-4"
                     label="Password"
-                    // type="password"// ẩn
+                    type="password"// ẩn
                     size="lg"
                     required
                     value={password}

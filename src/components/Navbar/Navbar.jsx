@@ -106,8 +106,10 @@ const Navbar = () => {
           </div>
           {/* ============ right ============ */}
           <div className="nav_right d-flex align-items-center gap-4">
-            <span className="cart_icon">
-              <i class="ri-shopping-bag-2-line"></i>
+            <span className="right_icon ">
+              <Link to="/cart">
+                <i class="ri-shopping-bag-2-line"></i>
+              </Link>
               {totalQuantity !== 0 && (
                 <span className="cart_badge">{totalQuantity}</span>
               )}
@@ -161,18 +163,16 @@ const Navbar = () => {
                 )}
               </div>
             ) : (
-              <span className="cart_icon">
+              <span className="right_icon ">
                 <Link to="/login">
                   <i className="ri-user-line"></i>
                 </Link>
               </span>
             )}
             <span className="mobile_menu" onClick={toggleMenu}>
-              <Link to="/login">
-                <Button>
-                  <i class="ri-menu-line"></i>
-                </Button>
-              </Link>
+              <Button>
+                <i class="ri-menu-line"></i>
+              </Button>
             </span>
           </div>
         </div>

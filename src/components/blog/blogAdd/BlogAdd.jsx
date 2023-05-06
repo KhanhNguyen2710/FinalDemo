@@ -3,7 +3,8 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import React, { useState } from "react";
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import { Input } from "reactstrap";
-import { db, storage } from "../../../firebase";
+import { auth, db, storage } from "../../../firebase";
+import { useSelector } from "react-redux";
 
 const BlogAdd = () => {
   const [show, setShow] = useState(false);
@@ -15,11 +16,19 @@ const BlogAdd = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+
+  const userID = useSelector((state) => state.auth.uid);
+
+      
+  
+  console.log("User ID: " + userID);
+
   //  add data
   const addBlog = async (e) => {
     e.preventDefault();
     // try {
-    const storageRef = ref(storage, "content/" + file.name);
+
+    const storageRef = ref(storage, "content/"+ file.name);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
     uploadTask.on(
@@ -33,21 +42,18 @@ const BlogAdd = () => {
       (error) => {
         console.log("Upload error: " + error);
       },
-
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
           await addDoc(collection(db, "content"), {
             img: downloadURL,
             title: title,
             content: content,
+            userId: userID,
+            
           });
         });
-        //console.log(file, content);
       }
     );
-    // } catch (error) {
-    //   console.log("error");
-    // }
   };
   // xem ảnh
   const handleFileInputChange = (e) => {
@@ -57,7 +63,7 @@ const BlogAdd = () => {
   };
   
   return (
-    <section>
+    <div >
       <div className="d-flex justify-content-center text-align-center">
         <Button
           className=""
@@ -132,7 +138,7 @@ const BlogAdd = () => {
           {/* =======================Footer End======================= */}
         </Form>
       </Modal>
-    </section>
+    </div>
   );
 };
 

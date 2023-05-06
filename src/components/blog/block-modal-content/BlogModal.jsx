@@ -1,9 +1,10 @@
 import React from "react";
 import { Col, Modal, Row } from "react-bootstrap";
+import Ava from "../../../img/Ava.jpg";
 import "../block-modal-content/BlogModal.css";
-import Ava from "../../../img/Ava.jpg"
+import BlogComments from "./BlogComments";
 
-function BlogModal({ id, contentImg, title, img, ...props }) {
+function BlogModal({ id, contentImg, title, img,displayName, ...props }) {
   return (
     <div>
       <Modal
@@ -31,7 +32,7 @@ function BlogModal({ id, contentImg, title, img, ...props }) {
                 alt=""
               />
               <div>
-                <h6 className="Custom_Name mb-0 mt-3">Chiba Inu</h6>
+                <h6 className="Custom_Name mb-0 mt-3">{displayName}</h6>
               </div>
             </div>
             {/* =================img================= */}
@@ -55,7 +56,7 @@ function BlogModal({ id, contentImg, title, img, ...props }) {
                     maxWidth: "100%",
                     maxHeight: "100%",
                     borderRadius: "25px",
-                    boxShadow:"5"
+                    boxShadow: "5",
                   }}
                 />
               </div>
@@ -73,14 +74,11 @@ function BlogModal({ id, contentImg, title, img, ...props }) {
                 </h3>
 
                 <p className="contentImg ">{contentImg}</p>
+                <BlogComments />
               </div>
             </Col>
           </Row>
         </Modal.Body>
-
-        {/* <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
-      </Modal.Footer> */}
       </Modal>
     </div>
   );

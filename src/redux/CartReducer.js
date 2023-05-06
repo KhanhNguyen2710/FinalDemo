@@ -31,7 +31,7 @@ const CartReducer = createSlice({
           Number(existingProduct.totalPrice) + Number(newProduct.price);
       }
 
-      // TODO: fix // fix done // 
+      // TODO: fix // fix done //
       state.totalAmount = state.cartProduct.reduce(
         (total, product) =>
           total + Number(product.totalPrice) * Number(product.quantity),
@@ -46,26 +46,47 @@ const CartReducer = createSlice({
 
     removeProduct: (state, action) => {
       const productId = action.payload;
-      
+
       const existingProduct = state.cartProduct.find(
         (product) => product.id === productId
-        
-      );console.log("removeProduct", existingProduct);
+      );
+      console.log("removeProduct", existingProduct);
       if (existingProduct) {
-        if (existingProduct.quantity === 1) {
-        // Nếu sản phẩm chỉ còn 1 thì xoá 
-          state.cartProduct = state.cartProduct.filter(
+        const productQuantity = existingProduct.quantity;
+        const productPrice = existingProduct.price;
+        state.cartProduct = state.cartProduct.filter(
           (product) => product.id !== productId
+        );
+        state.totalQuantity -= productQuantity;
+        state.totalAmount -= productPrice * productQuantity;
+      }
+    },
+
+
+    //+
+    increaseQuantity: (state, action) => {
+      const productId = action.payload;
+      const product = state.cartProduct.find((p) => p.id === productId);
+      if (product) {
+        product.quantity++;
+        state.totalQuantity++;
+        state.totalAmount += Number(product.totalPrice);
+      }
+    },
+    //-
+    decreaseQuantity: (state, action) => {
+      const productId = action.payload;
+      const product = state.cartProduct.find((p) => p.id === productId);
+      if (product) {
+        product.quantity--;
+        state.totalQuantity--;
+        state.totalAmount -= Number(product.totalPrice);
+        if (product.quantity === 0) {
+          state.cartProduct = state.cartProduct.filter(
+            (p) => p.id !== productId
           );
-        } else {
-          // Nếu sản phẩm còn nhiều hơn 1 thì giảm số lượng đi 1
-          existingProduct.quantity--;
-          existingProduct.totalPrice -= existingProduct.price;
         }
       }
-      state.totalQuantity--;
-      state.totalAmount -= existingProduct.price * existingProduct.quantity;
-
     },
   },
 });

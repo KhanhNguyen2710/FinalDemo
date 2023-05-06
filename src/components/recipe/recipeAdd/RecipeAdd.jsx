@@ -1,6 +1,6 @@
 import { addDoc, collection } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import { Input } from "reactstrap";
 import { db, storage } from "../../../firebase";
@@ -24,6 +24,20 @@ const RecipeAdd = () => {
   const [ingredient, setIngredient] = useState([]);
   const [description, setDescription] = useState("");
 
+
+useEffect(() => {
+  if (!show) {
+    // Reset the form when the modal is closed
+    setFile(null);
+    setPreview(null);
+    setTitle("");
+    setDescription("");
+    setIngredient([]);
+    setSteps([]);
+  }
+}, [show]);
+  
+  
   const addRecipe = async (e) => {
     e.preventDefault();
     let isFormValid = true;
@@ -39,7 +53,7 @@ const RecipeAdd = () => {
     // try {
      if (isFormValid) {
     // ...code for uploading the image and adding the recipe to the database
-       const storageRef = ref(storage, "recipes/" + file.name);
+    const storageRef = ref(storage, "recipes/" + file.name);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
     uploadTask.on(
@@ -67,8 +81,7 @@ const RecipeAdd = () => {
     );
   };
   }
-
-    
+  
   // xem ảnh
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
@@ -76,12 +89,12 @@ const RecipeAdd = () => {
     setFile(file);
   };
 
-  // Add ingredient
-  const handleIngredient = (e, i) => {
-    const ingredientClone = [...ingredient];
-    ingredientClone[i] = e.target.value;
-    setIngredient(ingredientClone);
-  };
+   // Add ingredient
+   const handleIngredient = (e, i) => {
+     const ingredientClone = [...ingredient];
+     ingredientClone[i] = e.target.value;
+     setIngredient(ingredientClone);
+   };
 
   const handleIngredientCount = () => {
     setIngredient([...ingredient, ""]);
@@ -97,6 +110,8 @@ const RecipeAdd = () => {
   const handleStepCount = () => {
     setSteps([...steps, ""]);
   };
+
+
 
   return (
     <section>
@@ -171,25 +186,27 @@ const RecipeAdd = () => {
 
                 {/* ====== Add ingredient ====== */}
                 <Form.Group>
-                  <label style={{ marginRight: "10px", marginTop: "30px" }}>
-                    Ingredient :{" "}
-                  </label>
-                  {ingredient.map((ingredient, index) => (
-                    <Form.Control
-                      key={index}
-                      type="text"
-                      style={{ borderRadius: "15px", marginBottom: "15px" }}
-                      value={ingredient}
-                      onChange={(e) => handleIngredient(e, index)}
-                    />
-                  ))}
-                  <Button
-                    style={{ padding: "8px" }}
-                    type="button"
-                    onClick={handleIngredientCount}
-                  >
-                    Add Ingredient
-                  </Button>
+                  
+                    <label style={{ marginRight: "10px", marginTop: "30px" }}>
+                      Ingredient :{" "}
+                    </label>
+                    {ingredient.map((ingredient, index) => (
+                      <Form.Control
+                        key={index}
+                        type="text"
+                        style={{ borderRadius: "10px", marginBottom: "15px" }}
+                        value={ingredient}
+                        onChange={(e) => handleIngredient(e, index)}
+                      />
+                    ))}
+                    <Button
+                      style={{ padding: "8px" }}
+                      type="button"
+                      onClick={handleIngredientCount}
+                    >
+                      Add Ingredient
+                    </Button>
+                 
                 </Form.Group>
 
                 {/* ====== Add Step ====== */}

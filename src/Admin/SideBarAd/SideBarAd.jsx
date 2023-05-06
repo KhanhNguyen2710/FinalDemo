@@ -43,7 +43,9 @@ const SideBarAd = () => {
  const [activeItem, setActiveItem] = useState(null);
  const handleItemClick = (item) => {
    setActiveItem(item);
- };
+  };
+  
+  
   return (
     <div
       className="sidebar"
@@ -51,7 +53,7 @@ const SideBarAd = () => {
         height: "100%",
         backgroundColor: "#6F3F14",
         color: "white",
-        width: "240px",
+        // width: "240px",
       }}
     >
       <Toolbar />
@@ -80,30 +82,7 @@ const SideBarAd = () => {
           </Link>
         ))}
       </div>
-
-      {/* {AdminTabs.map((item, index) => (
-        <ul className="sidebar ">
-          <Link to={item.link}>
-            <li className="sidebar-item">
-              {item.name}
-            </li>
-          </Link>
-    
-        </ul>
-      ))} */}
-
-      {/* <ul className="sidebar ">
-        <Link to="/admin/managerAccount ">
-          <li className="sidebar-item">Manager Account</li>
-        </Link>
-        <li className="sidebar-item">
-          <Link to="/admin/chart">Chart</Link>
-        </li>
-        <li className="sidebar-item">
-          <Link to="/admin/managerProduct">Manager Product</Link>
-        </li>
-      </ul> */}
-
+     
       <ListItem disablePadding className="sidebar-item" onClick={logout}>
         <ListItemButton className="no-hover">
           <ListItemIcon style={{ color: "white" }}>
@@ -113,6 +92,8 @@ const SideBarAd = () => {
           <ListItemText primary="Logout" />
         </ListItemButton>
       </ListItem>
+
+      
     </div>
   );
 };

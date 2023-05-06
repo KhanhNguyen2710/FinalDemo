@@ -16,7 +16,7 @@ const Layout = () => {
 
   if (adminEmail === "khanh@test.com") {
     return (
-      <div style={{ display: "flex", height: "100vh", background: "#e7e7e7" }}>
+      <div className="" style={{ display: "flex", height: "100vh", background: "#e7e7e7" }}>
         <div>
           <SideBarAd />
         </div>

@@ -29,48 +29,32 @@ const Profile = () => {
       // kiểm tra userId trước khi gọi hàm
       getDocument(userId);
     }
-  }, [userId]); // đặt userId vào dependency array để useEffect chạy lại khi userId thay đổi
+  }, [userId]); // useEffect chạy lại khi userId thay đổi
 
-const [avatar, setAvatar] = useState(null);
+const [editedData, setEditedData] = useState({});
+  
+const updateUserData = async () => {
+  try {
+    await db.collection("user").doc(userId).update(editedData);
+    alert("Update successful!");
+  } catch (error) {
+    console.error(error);
+    alert("Update failed!");
+  }
+};
+const handleInputChange = (e) => {
+  const { name, value } = e.target;
+  setEditedData((prevData) => ({
+    ...prevData,
+    [name]: value,
+  }));
+};
 
-  const handleAvatarChange = (event) => {
-    if (event.target.files[0]) {
-      setAvatar(event.target.files[0]);
-    }
-  };
+const [isEditing, setIsEditing] = useState(false);
 
-  const handleAvatarUpdate = () => {
-    if (avatar) {
-      const storageRef = storage.ref(`avatars/${userId}/${avatar.name}`);
-      const uploadTask = storageRef.put(avatar);
-
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          // progress
-        },
-        (error) => {
-          console.log(error);
-        },
-        () => {
-          // completed
-          storageRef.getDownloadURL().then((url) => {
-            db.collection("users")
-              .doc(userId)
-              .update({
-                avatarUrl: url,
-              })
-              .then(() => {
-                console.log("Avatar updated successfully");
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-          });
-        }
-      );
-    }
-  };
+const handleEditClick = () => {
+  setIsEditing(true);
+};
 
   return (
     <Helmet title="Profile">
@@ -83,21 +67,13 @@ const [avatar, setAvatar] = useState(null);
             </div>
             {/* ==============img ava ============== */}
             <div className="d-flex gap-4 m-auto">
-              {/* <img
-                src={Ava}
+              <img
+                src={data.photURL|| Ava}
                 className="avaProfile mb-3"
                 style={{ width: 90, height: 90 }}
                 alt=""
               />
-              <button className="btn_change">Change</button> */}
-              <img
-                style={{ width: 90, height: 90 }}
-                className="avaProfile mb-3"
-                src={data.avatarUrl || Ava}
-                alt="Avatar"
-              />
-              <input type="file" onChange={handleAvatarChange} />
-              <button onClick={handleAvatarUpdate}>Update avatar</button>
+              <button className="btn_change">Change</button>
             </div>
             <div>
               {/* ==============Information Start============== */}
@@ -136,18 +112,6 @@ const [avatar, setAvatar] = useState(null);
                     value={data.phone}
                   />
                 </Col>
-
-                <Form.Group
-                  className=" mb-3"
-                  controlId="exampleForm.ControlTextarea1"
-                >
-                  <label>Description</label>
-                  <Form.Control
-                    as="textarea"
-                    rows={3}
-                    style={{ borderRadius: "20px" }}
-                  />
-                </Form.Group>
               </Form>
               {/* ==============Information End============== */}
             </div>

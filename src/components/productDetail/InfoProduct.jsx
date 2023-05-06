@@ -40,7 +40,7 @@ const InfoProduct = () => {
                     maxHeight: "500px",
                     width: "500px",
                     borderRadius: "15px",
-                    border: "5px solid #BC6C25B5",
+                    border: "1px solid #BC6C25B5",
                   }}
                 />
               </Col>
@@ -48,9 +48,7 @@ const InfoProduct = () => {
               <Col className="md-6">
                 <h1 className=" mb-4">{product.productName}</h1>
                 <h5 className="mb-4">${product.price}</h5>
-                {/* <p className="mb-4">
-              hihihihi
-            </p> */}
+                <p className="mb-4">{product.description}</p>
                 <div className="mb-5 d-flex gap-3 ">
                   <label className="">Quantity:</label>
                   <div className="d-flex gap-1">
@@ -85,7 +83,7 @@ const InfoProduct = () => {
                 eventKey="product-details"
                 title="Product details"
               >
-                <p>{product.describe}</p>
+                <p>{product.description}</p>
               </Tab>
               <Tab className="tab" eventKey="reviews" title="Reviews">
                 <p>No reviews yet.</p>

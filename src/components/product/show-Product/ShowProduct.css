@@ -6,17 +6,17 @@
   
 }
 
-
 .product-item {
   width: calc(25% - 10px);
   margin-bottom: 20px;
   /* border: 1px solid rgb(155, 155, 155); */
   transition: 0.2s;
-  box-shadow: 2px 2px 7px #523617;
-  background:#523617;
-  color: #ffffff;
+  box-shadow: 1px 1px 20px -5px black;
+  background:#ffffff;
+  color: #000000;
 
-  
+
+
 }
 .product-item-body{
   /* background:rgb(255, 255, 255) */

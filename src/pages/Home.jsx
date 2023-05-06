@@ -10,7 +10,7 @@ import "../styles/Home.css";
 const Home = () => {
   return (
     <Helmet title="Home">
-      <section>
+      <div>
         <Container>
           <Row>
             <Col lg="6" md="6">
@@ -56,12 +56,12 @@ const Home = () => {
             </Col>
           </Row>
         </Container>
-      </section>
+      </div>
       {/* ===================Gallery=================== */}
 
-      <section>
+      <div>
         <GalleryImgSection />
-      </section>
+      </div>
       {/* ===================Comment=================== */}
 
       <section>

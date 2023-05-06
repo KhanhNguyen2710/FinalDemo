@@ -1,8 +1,3 @@
-/* 
-.sidebar:hover{
-  background: #606c38;
-  color: #fefae0;
-} */
 
 .sidebar-item{
   height: 70px;
@@ -23,3 +18,35 @@
   background-color: #606c38;
   color: #fefae0;
 }
+
+
+.sidebar-item-logout {
+  order: 999;
+}
+
+
+.sidebar {
+  height: 100%;
+  background-color: #6F3F14;
+  color: white;
+  width: 240px;
+}
+
+@media screen and (max-width: 768px) {
+  .sidebar {
+    width: 50px;
+  }
+  .sidebar-item .sidebar_btn .MuiListItemIcon-root {
+    min-width: unset;
+    margin-right: 0;
+  }
+ 
+  .sidebar-item.sidebar-active .sidebar_btn .MuiListItemIcon-root {
+    margin-right: 0;
+  }
+
+  .MuiListItemText-root {
+    display: none;
+  }
+}
+
