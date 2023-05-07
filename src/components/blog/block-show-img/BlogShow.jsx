@@ -25,7 +25,7 @@ useEffect(() => {
       const user = await getUser(userId);
       data.push({ id: doc.id, ...doc.data(), user });
     });
-    await Promise.all(promises);
+    await Promise.all(promises); //enough
     setImageList(data);
   };
   getData();
@@ -59,7 +59,7 @@ useEffect(() => {
   return (
     <Container>
       <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 3, 922: 4 }}>
-        <Masonry gutter="1.5rem">
+        <Masonry gutter="2rem">
           {imageList.map((item, index) => (
             <div
               key={item.id}
@@ -93,6 +93,7 @@ useEffect(() => {
                   display: "block",
                   borderRadius: "15px",
                   cursor: "pointer",
+                  boxShadow: "1px 1px 10px -5px black",
                 }}
               />
             </div>

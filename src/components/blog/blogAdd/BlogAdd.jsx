@@ -1,4 +1,4 @@
-import { addDoc, collection } from "firebase/firestore";
+import { Timestamp, addDoc, collection } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import React, { useState } from "react";
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
@@ -49,7 +49,7 @@ const BlogAdd = () => {
             title: title,
             content: content,
             userId: userID,
-            
+            createAt: Timestamp.now().toDate(),
           });
         });
       }

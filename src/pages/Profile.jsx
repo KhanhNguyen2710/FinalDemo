@@ -31,24 +31,24 @@ const Profile = () => {
     }
   }, [userId]); // useEffect chạy lại khi userId thay đổi
 
-const [editedData, setEditedData] = useState({});
+// const [editedData, setEditedData] = useState({});
   
-const updateUserData = async () => {
-  try {
-    await db.collection("user").doc(userId).update(editedData);
-    alert("Update successful!");
-  } catch (error) {
-    console.error(error);
-    alert("Update failed!");
-  }
-};
-const handleInputChange = (e) => {
-  const { name, value } = e.target;
-  setEditedData((prevData) => ({
-    ...prevData,
-    [name]: value,
-  }));
-};
+// const updateUserData = async () => {
+//   try {
+//     await db.collection("user").doc(userId).update(editedData);
+//     alert("Update successful!");
+//   } catch (error) {
+//     console.error(error);
+//     alert("Update failed!");
+//   }
+// };
+// const handleInputChange = (e) => {
+//   const { name, value } = e.target;
+//   setEditedData((prevData) => ({
+//     ...prevData,
+//     [name]: value,
+//   }));
+// };
 
 const [isEditing, setIsEditing] = useState(false);
 
@@ -68,7 +68,7 @@ const handleEditClick = () => {
             {/* ==============img ava ============== */}
             <div className="d-flex gap-4 m-auto">
               <img
-                src={data.photURL|| Ava}
+                src={data.photoURL || Ava}
                 className="avaProfile mb-3"
                 style={{ width: 90, height: 90 }}
                 alt=""

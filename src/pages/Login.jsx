@@ -5,6 +5,7 @@ import {
 } from "firebase/auth";
 import {
   MDBBtn,
+  MDBCheckbox,
   MDBCol,
   MDBContainer,
   MDBIcon,
@@ -17,11 +18,12 @@ import ReactLoading from "react-loading";
 import { Link, useNavigate } from "react-router-dom";
 import ".././styles/Register_Login.css";
 import Helmet from "../components/Helmet/Helmet";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
 
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import Register_img from "../img/lycoffe.png";
+import { Timestamp, doc, setDoc } from "firebase/firestore";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -38,7 +40,8 @@ function Login() {
       const userCredential = await signInWithEmailAndPassword(
         auth,
         email,
-        password
+        password,
+        
       );
       const user = userCredential.user;
       console.log("User", user);
@@ -61,7 +64,15 @@ function Login() {
   const signInWithGoogle = (e) => {
     signInWithPopup(auth, provider)
       .then((result) => {
-        // const user = result.user;
+        const user = result.user;
+        const userRef = doc(db, "user", user.uid);
+        setDoc(userRef, {
+          displayName: user.displayName,
+          email: user.email,
+          photoURL: user.photoURL,
+          uid: user.uid,
+          createAt: Timestamp.now().toDate(),
+        })
         toast.success("Login successfully");
         navigate("/home");
       })
@@ -99,7 +110,8 @@ function Login() {
                         className="icon"
                         onClick={signInWithGoogle}
                       />
-                    </MDBBtn>
+                      </MDBBtn>
+                      
                   </div>
                   {/* ============= Input ============= */}
                   <div className="divider d-flex align-items-center my-4">
@@ -147,14 +159,7 @@ function Login() {
                       </p>
                     </div>
                   </form>
-                  {/* <MDBBtn
-                    type="submit"
-                    className="submit-btn mb-0 px-5"
-                    size="lg"
-                    onClick={signInWithGoogle}
-                  >
-                    Login with GG
-                  </MDBBtn> */}
+                  
                 </div>
               </MDBCol>
             )}

@@ -12,11 +12,13 @@ import {
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 // import { useNavigate } from "react-router-dom";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { Input } from "reactstrap";
 import ".././styles/Register_Login.css";
 import Helmet from "../components/Helmet/Helmet";
-import { auth, db } from "../firebase.js";
+import { auth, db, storage } from "../firebase.js";
 import Register_img from "../img/lycoffe.png";
 
 function Register() {
@@ -25,6 +27,8 @@ function Register() {
   const [username, setUsername] = useState("");
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
+  const [file, setFile] = useState(null);
+   const [preview, setPreview] = useState(null);
 
   const navigate = useNavigate();
 
@@ -39,24 +43,45 @@ function Register() {
         password
       );
       const user = userCredential.user;
-      
 
       // add to firestore
-      await setDoc(doc(db, "user", user.uid), {
-        uid: user.uid,
-        displayName: username,
-        email: email,
-        phone: phone,
-        password: password,
-        photoURL:"",
-      });
-      console.log("register successfully");
+      const storageRef = ref(storage, "user/" + file.name);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log("Upload is " + progress + "% done");
+        },
+        (error) => {
+          console.log("Upload error: " + error);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+            await setDoc(doc(db, "user", user.uid), {
+              uid: user.uid,
+              displayName: username,
+              email: email,
+              phone: phone,
+              password: password,
+              photoURL: downloadURL,
+            });
+          });
+        }
+      );
+      toast.success("register successfully");
       console.log(user);
       navigate("/home");
     } catch (error) {
-      toast.error("wrong");
+      toast.error(error.message);
     }
   };
+
+
+
   return (
     <Helmet title="Register">
       <section>
@@ -110,11 +135,19 @@ function Register() {
                   <MDBInput
                     className="Input mb-4"
                     label="Password"
-                    type="password"// ẩn
+                    type="password" // ẩn
                     size="lg"
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <Input
+                    className=""
+                    style={{ borderRadius: "10px" }}
+                    type="File"
+                    size="lg"
+                    required
+                    onChange={(e) => setFile(e.target.files[0])}
                   />
 
                   <div className="submit text-md-start mt-4 pt-2  ">

@@ -6,12 +6,18 @@ import { useParams } from "react-router-dom";
 import { Input } from "reactstrap";
 import { db } from "../../firebase";
 import "../productDetail/InfoProduct.css";
+import { useDispatch, useSelector } from "react-redux";
+import { cartActions } from "../../redux/CartReducer";
 
 const InfoProduct = () => {
   // const [product, setProduct] = useState(null)
   const { id } = useParams();
   const [product, setProduct] = useState(null);
 
+const totalQuantity = useSelector((state) => state.cart.totalQuantity);
+   const cartProduct = useSelector((state) => state.cart.cartProduct);
+
+const dispatch = useDispatch();
   useEffect(() => {
     const getProduct = async () => {
       const document = await getDoc(doc(db, "product", id));
@@ -52,7 +58,12 @@ const InfoProduct = () => {
                 <div className="mb-5 d-flex gap-3 ">
                   <label className="">Quantity:</label>
                   <div className="d-flex gap-1">
-                    <button className="btn-quantity px-3">
+                    <button
+                      className="btn-quantity px-3"
+                      onClick={() =>
+                        dispatch(cartActions.decreaseQuantity(product.id))
+                      }
+                    >
                       <MDBIcon fas icon="minus" />
                     </button>
                     <Input
@@ -60,14 +71,34 @@ const InfoProduct = () => {
                       type="number"
                       size="sm"
                       style={{ width: "50px" }}
-                      defaultValue={1}
+                      value={totalQuantity}
                     />
-                    <button className="btn-quantity px-3" color="link">
+                    <button
+                      className="btn-quantity px-3"
+                      color="link"
+                      onClick={() =>
+                        dispatch(cartActions.increaseQuantity(product.id))
+                      }
+                    >
                       <MDBIcon fas icon="plus" />
                     </button>
                   </div>
                 </div>
-                <Button>Add to Cart</Button>
+                <Button
+                  onClick={() =>
+                    dispatch(
+                      cartActions.addProduct({
+                        id: product.id,
+                        productName: product.productName,
+                        img: product.img,
+                        price: product.price,
+                        // quantity: product.quantity,
+                      })
+                    )
+                  }
+                >
+                  Add to Cart
+                </Button>
               </Col>
             </Row>
           </Container>

@@ -15,6 +15,7 @@ import Admin from "../Admin/Admin";
 import AdminOnly from "../Admin/AdminOnly";
 import AdRouters from "./AdRouters";
 import BlogAdd from "../components/blog/blogAdd/BlogAdd";
+import Checkout from "../pages/Checkout";
 
 const Routers = () => {
   return (
@@ -37,6 +38,8 @@ const Routers = () => {
       <Route path="/blog" element={<Blog />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+
+      <Route path="/checkout" element={<Checkout />} />
 
       {/* ADMIN */}
       <Route

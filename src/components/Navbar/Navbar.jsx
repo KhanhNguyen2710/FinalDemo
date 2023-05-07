@@ -11,21 +11,49 @@ import { authLogin, authLogout } from "../../redux/AuthReducer";
 import "../Navbar/Navbar.css";
 import "./Nav_links";
 import Nav_links from "./Nav_links";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../firebase";
 
 const Navbar = () => {
   const menuRef = useRef(null);
   const auth = getAuth();
   const [dropdown, setDropdown] = useState(false);
+  const [data, setData] = useState({});
 
   const toggleMenu = () => menuRef.current.classList.toggle("show_menu");
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
+
+
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
+  const userId = useSelector((state) => state.auth.uid);
 
   const handleDropdown = () => {
     setDropdown(!dropdown);
   };
+// take user collection
+useEffect(() => {
+  const getDocument = async (userId) => {
+    // => userId into function
+    const document = await getDoc(doc(db, "user", userId));
+    if (document.exists()) {
+      setData({ id: document.id, ...document.data() });
+      console.log(" data:", document.data());
+    } else {
+      console.log("No such document!");
+    }
+  };
+  if (userId) {
+    // check
+    getDocument(userId);
+  }
+}, [userId]);
+
+
+
+
+
   //
   const logout = () => {
     signOut(auth)
@@ -50,16 +78,6 @@ const Navbar = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // user google
-        // console.log("name", user);
-        // if (user.displayName == null) {
-        //   const u1 = user.email.substring(0,user.email.indexOf("@"));
-        //   const uName = u1.charAt(0).toUpperCase() + u1.slice(1);
-        //   // console.log("n", uName);
-        //   setDisplayAccount(uName);
-        // } else {
-        //    setDisplayAccount(user);
-        // }
         setDisplayAccount(user);
         dispatch(
           authLogin({
@@ -129,7 +147,7 @@ const Navbar = () => {
                       borderRadius: "50%",
                       border: "1px solid black",
                     }}
-                    src={displayAccount.photoURL || Ava}
+                    src={displayAccount.photoURL || data.photoURL }
                     alt=""
                   />
                   {/* {displayAccount.displayName}  */}

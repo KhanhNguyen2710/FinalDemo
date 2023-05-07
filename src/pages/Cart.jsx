@@ -13,12 +13,11 @@ function Cart() {
   const cartProduct = useSelector(state => state.cart.cartProduct);
   console.log("show", cartProduct);
   const totalAmount = useSelector((state) => state.cart.totalAmount);
-  console.log("show--", totalAmount);
   
 
 
 
-  
+
   const dispatch = useDispatch();
 
 
@@ -143,9 +142,12 @@ function Cart() {
                     </span>
                   </MDBListGroupItem>
                 </MDBListGroup>
+
+                  <Link to="/checkout">
                 <MDBBtn block size="lg">
                   Go to checkout
                 </MDBBtn>
+                  </Link>
               </MDBCardBody>
             </MDBCard>
           </Col>
