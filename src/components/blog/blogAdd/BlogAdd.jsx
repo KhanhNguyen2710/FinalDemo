@@ -44,11 +44,16 @@ const BlogAdd = () => {
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+          const today = new Date();
+          const date = today.toDateString();
+          const time = today.toLocaleTimeString();
           await addDoc(collection(db, "content"), {
             img: downloadURL,
             title: title,
             content: content,
             userId: userID,
+            createDate: date,
+            createTime: time,
             createAt: Timestamp.now().toDate(),
           });
         });

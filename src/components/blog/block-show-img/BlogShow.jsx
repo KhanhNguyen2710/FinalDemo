@@ -110,6 +110,7 @@ useEffect(() => {
           title={selectedImage.title}
           img={selectedImage.img}
           displayName={selectedImage.user.displayName}
+          createDate={selectedImage.createDate}
         />
       )}
     </Container>

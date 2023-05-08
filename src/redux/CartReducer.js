@@ -53,7 +53,7 @@ const CartReducer = createSlice({
       console.log("removeProduct", existingProduct);
       if (existingProduct) {
         const productQuantity = existingProduct.quantity;
-        const productPrice = existingProduct.price;
+        const productPrice = existingProduct.totalPrice;
         state.cartProduct = state.cartProduct.filter(
           (product) => product.id !== productId
         );

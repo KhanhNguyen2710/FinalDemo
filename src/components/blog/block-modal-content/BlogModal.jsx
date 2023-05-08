@@ -4,7 +4,15 @@ import Ava from "../../../img/Ava.jpg";
 import "../block-modal-content/BlogModal.css";
 import BlogComments from "./BlogComments";
 
-function BlogModal({ id, contentImg, title, img,displayName, ...props }) {
+function BlogModal({
+  id,
+  contentImg,
+  title,
+  img,
+  displayName,
+  createDate,
+  ...props
+}) {
   return (
     <div>
       <Modal
@@ -20,7 +28,7 @@ function BlogModal({ id, contentImg, title, img,displayName, ...props }) {
         <Modal.Body>
           <Row className=" body-section ">
             {/* ===================== Author  ===================== */}
-            <div className="d-flex align-item-center gap-4 mb-3">
+            <div className="d-flex align-items-center gap-4 mb-3">
               <img
                 src={Ava}
                 style={{
@@ -31,8 +39,9 @@ function BlogModal({ id, contentImg, title, img,displayName, ...props }) {
                 }}
                 alt=""
               />
-              <div>
-                <h6 className="Custom_Name mb-0 mt-3">{displayName}</h6>
+              <div style={{ display: "" }}>
+                <h3 className="Custom_Name mb-1 mt-3">{displayName}</h3>
+                <p>{createDate}</p>
               </div>
             </div>
             {/* =================img================= */}
@@ -65,7 +74,7 @@ function BlogModal({ id, contentImg, title, img,displayName, ...props }) {
             {/* =================content================= */}
             <Col lg="5" md="5">
               {/* ===================== ===================== */}
-              <div style={{ overflowY: "auto", height: "550px" }}>
+              <div style={{ overflowY: "auto", height: "550px", width:"auto" }}>
                 <h3
                   className="mb-4 d-flex fw-bold justify-content-center "
                   style={{ color: "black" }}

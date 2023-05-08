@@ -135,14 +135,14 @@ function Login() {
                       onChange={(e) => setPassword(e.target.value)}
                     />
 
-                    {/* <div className="d-flex justify-content-between mb-4">
+                    <div className="d-flex justify-content-between mb-4">
                     <MDBCheckbox
                       name="flexCheck"
                       value=""
                       label="Remember me"
                     />
                     <a href="!#">Forgot password?</a>
-                  </div> */}
+                  </div>
 
                     <div className="submit text-md-start mt-4 pt-2  ">
                       <MDBBtn
