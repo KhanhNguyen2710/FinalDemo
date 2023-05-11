@@ -1,9 +1,9 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import useAuth from "../custom/useAuth";
+import Auth from "../User/Auth";
 
 const ProtectedRoute = ({ children }) => {
-  const { currentUser } = useAuth();
+  const { currentUser } = Auth();
 
   return currentUser ? children : <Navigate to="/login" />;
 };

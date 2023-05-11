@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Ava from "../img/Ava.jpg"
 import { cartActions } from "../redux/CartReducer";
+import { Authenticated } from "../redux/AuthReducer";
 
 
 function Cart() {
@@ -13,6 +14,8 @@ function Cart() {
   const cartProduct = useSelector(state => state.cart.cartProduct);
   console.log("show", cartProduct);
   const totalAmount = useSelector((state) => state.cart.totalAmount);
+
+  const isLoggin = useSelector(Authenticated)
   
 
 
@@ -35,12 +38,15 @@ function Cart() {
               <MDBTable responsive>
                 <MDBTableHead>
                   <tr>
-                    <th scope="col">
+                    <th>
                       <h4>Shopping Bag</h4>
                     </th>
-                    {/* <th scope="col">Format</th> */}
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Price</th>
+                    <th>
+                      <h6>Quantity</h6>
+                    </th>
+                    <th>
+                      <h6>Price</h6>
+                    </th>
                   </tr>
                 </MDBTableHead>
 
@@ -143,11 +149,11 @@ function Cart() {
                   </MDBListGroupItem>
                 </MDBListGroup>
 
-                  <Link to="/checkout">
-                <MDBBtn block size="lg">
-                  Go to checkout
-                </MDBBtn>
-                  </Link>
+                <Link to="/checkout">
+                  <MDBBtn block size="lg">
+                    Go to checkout
+                  </MDBBtn>
+                </Link>
               </MDBCardBody>
             </MDBCard>
           </Col>

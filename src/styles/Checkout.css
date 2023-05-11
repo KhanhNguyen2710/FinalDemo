@@ -1,0 +1,20 @@
+.checkOut_page{
+    /* box-shadow: 1px 1px 15px -5px black; */
+}
+
+
+.checkOut_Col{
+  border-radius: 10px ;
+  background: #ad6b31;
+  color: white;
+}
+
+.check_product{
+  padding: 10px 20px
+}
+
+.color_text{
+  color: white;
+}
+
+

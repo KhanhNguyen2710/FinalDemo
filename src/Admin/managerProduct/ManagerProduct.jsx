@@ -53,7 +53,7 @@ const ManagerProduct = () => {
     indexOfFirstProduct,
     indexOfLastProduct
   );
-  const pageNumbers = [];
+  const pageNumbers = []; //loop
   for (let i = 1; i <= Math.ceil(productList.length / productsPerPage); i++) {
     pageNumbers.push(i);
   }

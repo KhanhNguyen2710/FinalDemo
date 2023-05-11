@@ -59,7 +59,6 @@ function Login() {
       setLoading(false);
     }
   };
-
   const provider = new GoogleAuthProvider();
   const signInWithGoogle = (e) => {
     signInWithPopup(auth, provider)

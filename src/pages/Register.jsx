@@ -47,7 +47,6 @@ function Register() {
       // add to firestore
       const storageRef = ref(storage, "user/" + file.name);
       const uploadTask = uploadBytesResumable(storageRef, file);
-
       uploadTask.on(
         "state_changed",
         (snapshot) => {

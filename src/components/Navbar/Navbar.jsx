@@ -50,10 +50,6 @@ useEffect(() => {
   }
 }, [userId]);
 
-
-
-
-
   //
   const logout = () => {
     signOut(auth)
