@@ -18,6 +18,7 @@ import BlogAdd from "../components/blog/blogAdd/BlogAdd";
 import Checkout from "../pages/Checkout";
 import UserOnly from "../User/userOnly/UserOnly";
 import ProtectedRoute from "./ProtectedRoute";
+import CheckOutSuccess from "../components/checkOut/CheckOutSuccess";
 
 const Routers = () => {
   return (
@@ -44,10 +45,9 @@ const Routers = () => {
       <Route
         path="/checkout"
         element={
-         <ProtectedRoute>
+          <ProtectedRoute>
             <Checkout />
-            </ProtectedRoute>
-    
+          </ProtectedRoute>
         }
       />
 
@@ -60,6 +60,8 @@ const Routers = () => {
           </AdminOnly>
         }
       />
+      {/* CHECK OUT */}
+      <Route path="/checkout-success" element={<CheckOutSuccess />} />
     </Routes>
   );
 };

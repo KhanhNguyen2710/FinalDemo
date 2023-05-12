@@ -1,12 +1,19 @@
+import {
+  PaymentElement,
+  useElements,
+  useStripe,
+} from "@stripe/react-stripe-js";
+import { Timestamp, addDoc, collection } from "firebase/firestore";
 import { MDBBtn, MDBInput } from "mdb-react-ui-kit";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Form } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { db } from "../../firebase";
+import { clearCart } from "../../redux/CartReducer";
 import { saveShippingAddress } from "../../redux/CheckoutReducer";
 import "../checkOut/CheckOutForm.css";
-import { PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { useEffect } from "react";
-import { toast } from "react-toastify";
 
 const initialShippingAddress = {
   name: "",
@@ -14,22 +21,28 @@ const initialShippingAddress = {
   phone: "",
   shipping: "",
 };
-// const initialShippingAddress = {
-//   name: "",
-//   line1: "",
-//   line2: "",
-//   city: "",
-//   state: "",
-//   phone: "",
-// };
 
 const CheckOutForm = () => {
   const [shippingAddress, setShippingAddress] = useState({
     ...initialShippingAddress,
   });
 
-  const dispatch = useDispatch();
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
+  const stripe = useStripe();
+  const elements = useElements();
+
+  const userId = useSelector((state) => state.auth.uid);
+  const userEmail = useSelector((state) => state.auth.email);
+  const cartProduct = useSelector((state) => state.cart.cartProduct);
+  const totalAmount = useSelector((state) => state.cart.totalAmount);
+  const selectShipping = useSelector((state) => state.checkout.shippingAddress);
+  // console.log("checkout", selectShipping);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleShipping = (e) => {
     const { name, value } = e.target;
     setShippingAddress({
@@ -37,14 +50,33 @@ const CheckOutForm = () => {
       [name]: value,
     });
   };
+
+  useEffect(() => {
+    if (!stripe) {
+      return;
+    }
+
+    const clientSecret = new URLSearchParams(window.location.search).get(
+      "payment_intent_client_secret"
+    );
+
+    if (!clientSecret) {
+      return;
+    }
+  }, [stripe]);
+
+  const paymentElementOptions = {
+    layout: "tabs",
+  };
+
+  //
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(shippingAddress);
-    dispatch(saveShippingAddress(shippingAddress));
-
     if (!stripe || !elements) {
       return;
     }
+    console.log(shippingAddress);
+    dispatch(saveShippingAddress(shippingAddress));
 
     setIsLoading(true);
 
@@ -69,38 +101,40 @@ const CheckOutForm = () => {
             setIsLoading(false);
             toast.success("Payment successful");
             // saveOrder();
+            saveOderHistory();
+            // navigate("/checkout-success");
           }
         }
       });
-
     setIsLoading(false);
   };
 
-  const stripe = useStripe();
-  const elements = useElements();
+  // save history
+  const saveOderHistory = () => {
+    const today = new Date();
+    const date = today.toDateString();
+    const time = today.toLocaleTimeString();
+    const orderConfig = {
+      userId,
+      userEmail,
+      cartProduct,
+      createDate: date,
+      createTime: time,
+      totalAmount: totalAmount,
+      orderStatus: "order placed. . . ",
+      selectShipping,
+      createAt: Timestamp.now().toDate(),
+    };
 
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+    try {
+      addDoc(collection(db, "orders"), orderConfig);
 
-  useEffect(() => {
-    if (!stripe) {
-      return;
+      dispatch(clearCart());
+      toast.success(" Save successfully");
+      navigate("/checkout-success");
+    } catch (error) {
+      toast.error(error.message);
     }
-
-    const clientSecret = new URLSearchParams(window.location.search).get(
-      "payment_intent_client_secret"
-    );
-
-    if (!clientSecret) {
-      return;
-    }
-  }, [stripe]);
-
-
-
-  const paymentElementOptions = {
-    layout: "tabs",
   };
 
   return (
@@ -143,7 +177,7 @@ const CheckOutForm = () => {
           onChange={(e) => handleShipping(e)}
           required
         />
-        
+
         <div className="mb-4 pb-2">
           <Form.Label>Shipping Method</Form.Label>
           <select

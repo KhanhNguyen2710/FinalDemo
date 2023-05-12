@@ -63,6 +63,8 @@ const AddProduct = ({ onProductAdded }) => {
         });
       }
     );
+
+    
     handleClose();
   };
   const handleFileInputChange = (e) => {
@@ -191,8 +193,8 @@ const AddProduct = ({ onProductAdded }) => {
             </Row>
           </Modal.Body>
 
-          {/* =======================Body End======================= */}
-          {/* =======================Footer Start======================= */}
+
+          {/* =======================Footer======================= */}
           <Modal.Footer>
             <Button
               size="lg"
@@ -204,7 +206,7 @@ const AddProduct = ({ onProductAdded }) => {
               ADD
             </Button>
           </Modal.Footer>
-          {/* =======================Footer End======================= */}
+         
         </Form>
       </Modal>
     </Container>

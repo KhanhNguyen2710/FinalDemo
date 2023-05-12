@@ -106,7 +106,6 @@ useEffect(() => {
     stepsClone[i] = e.target.value;
     setSteps(stepsClone);
   };
-
   const handleStepCount = () => {
     setSteps([...steps, ""]);
   };
@@ -236,8 +235,6 @@ useEffect(() => {
             </Row>
           </Modal.Body>
 
-          {/* =======================Body End======================= */}
-          {/* =======================Footer Start======================= */}
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
               Close
@@ -246,7 +243,6 @@ useEffect(() => {
               Save
             </Button>
           </Modal.Footer>
-          {/* =======================Footer End======================= */}
         </Form>
       </Modal>
     </div>

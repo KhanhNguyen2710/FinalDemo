@@ -14,13 +14,17 @@ const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK);
 
 const Checkout = () => {
   const [clientSecret, setClientSecret] = useState("");
-  const [message, setMessage] = useState("Proceed to checkout...");
   const cartProduct = useSelector((state) => state.cart.cartProduct);
-  console.log("cartProduct", cartProduct);
+  //console.log("cartProduct", cartProduct);
   const totalAmount = useSelector((state) => state.cart.totalAmount);
   const userEmail = useSelector((state) => state.auth.email);
   const shippingAddress = useSelector(saveShippingAddress);
 
+
+
+
+  const [message, setMessage] = useState("Proceed to checkout...");
+  
   const description = `CUP'S COFFFE payment: ${userEmail}`;
 
   useEffect(() => {

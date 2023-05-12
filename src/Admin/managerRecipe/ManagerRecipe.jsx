@@ -2,21 +2,26 @@ import {
   collection,
   deleteDoc,
   doc,
+  getDoc,
   getDocs,
-  updateDoc,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { Button, Modal, Pagination, Table } from "react-bootstrap";
+import { Button, Pagination, Table } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { Input } from "reactstrap";
 import RecipeAdd from "../../components/recipe/recipeAdd/RecipeAdd";
 import { db } from "../../firebase";
+import EditRecipe from "./EditRecipe";
 
 const ManagerRecipe = () => {
   const [recipeList, setRecipeListList] = useState([]);
-  const [editId, setEditId] = useState(null);
-  const [editTitle, setEditTitle] = useState("");
+  //
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage, setProductsPerPage] = useState(5);
 
+  const [modalShow, setModalShow] = useState(false);
+
+  
   useEffect(() => {
     const getData = async () => {
       let data = [];
@@ -30,10 +35,6 @@ const ManagerRecipe = () => {
     getData();
   }, []);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage, setProductsPerPage] = useState(5);
-  const [showModal, setShowModal] = useState(false);
-
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentRecipe = recipeList.slice(
@@ -46,37 +47,38 @@ const ManagerRecipe = () => {
     pageNumbers.push(i);
   }
 
-  const handleDelete = async (userID) => {
+  const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this user?")) {
-      await deleteDoc(doc(db, "user", userID));
+      await deleteDoc(doc(db, "recipes", id));
       setRecipeListList((prevState) =>
-        prevState.filter((user) => user.id !== userID)
+        prevState.filter((recipe) => recipe.id !== id)
       );
       toast.success("User successfully deleted.");
     }
   };
 
-  //
-  const handleEdit = (id) => {
-    setEditId(id);
-    setEditTitle(recipeList.find((recipe) => recipe.id === id).title);
-    setShowModal(true);
-  };
-  const handleSave = async (id, title) => {
-    await updateDoc(doc(db, "recipes", id), { title });
-    setRecipeListList(
-      recipeList.map((recipe) =>
-        recipe.id === id ? { ...recipe, title } : recipe
-      )
-    );
-    setEditId(null);
-    handleCloseModal();
+  const [editRecipe, setEditRecipe] = useState(null);
+  const getDocument = async (docId) => {
+    const document = await getDoc(doc(db, "recipes", docId));
+
+    if (document.exists()) {
+      setEditRecipe({ id: document.id, ...document.data() });
+      console.log("Document data:", document.data());
+    } else {
+      console.log("No such document!");
+    }
   };
 
-  const handleCloseModal = () => {
-    setShowModal(false);
+  const fetchData = async () => {
+    let data = [];
+    const querySnapshot = await getDocs(collection(db, "recipes"));
+    querySnapshot.forEach((doc) => {
+      data.push({ id: doc.id, ...doc.data() });
+      console.log(doc.id, " => ", doc.data());
+    });
+    setRecipeListList(data);
   };
-  //
+
   return (
     <div>
       <div>
@@ -113,15 +115,21 @@ const ManagerRecipe = () => {
                     }}
                   />
                 </td>
+
                 <td>
                   <div className="d-flex gap-4 " style={{ width: "30px" }}>
+                    <i class="ri-eye-fill fs-5"></i>
+                    <i
+                      class="fa fa-pencil fs-5"
+                      // onClick={() => handleEdit(item.id)}
+                      onClick={() => {
+                        getDocument(item.id);
+                        setModalShow(true);
+                      }}
+                    ></i>
                     <i
                       class="fa fa-trash fs-5"
                       onClick={() => handleDelete(item.id)}
-                    ></i>
-                    <i
-                      class="fa fa-pencil fs-5"
-                      onClick={() => handleEdit(item.id)}
                     ></i>
                   </div>
                 </td>
@@ -130,32 +138,28 @@ const ManagerRecipe = () => {
           </tbody>
         </Table>
 
-        
-        {/* {showModal && ( */}
-          <Modal show={showModal} onHide={handleCloseModal}>
-            <Modal.Header closeButton>
-              <Modal.Title>Edit Recipe</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <Input
-                type="text"
-                value={editTitle}
-                onChange={(e) => setEditTitle(e.target.value)}
-              />
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleCloseModal}>
-                Close
-              </Button>
-              <Button
-                variant="primary"
-                onClick={() => handleSave(editId, editTitle)}
-              >
-                Save
-              </Button>
-            </Modal.Footer>
-          </Modal>
-        {/* )} */}
+        {editRecipe && (
+          <EditRecipe
+            show={modalShow}
+            // onHide={() => setModalShow(false)}
+            id={editRecipe.id}
+            description={editRecipe.description}
+            title={editRecipe.title}
+            img={editRecipe.img}
+            createDate={editRecipe.createDate}
+            ingredient={editRecipe.ingredient}
+            steps={editRecipe.steps}
+            onHide={() => {
+              setModalShow(false);
+              fetchData();
+              
+            }}
+            onClose={() => {
+              setModalShow(false);
+              
+            }}
+          />
+        )}
 
         <Pagination>
           {pageNumbers.map((number) => (
