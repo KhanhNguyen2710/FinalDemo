@@ -34,7 +34,6 @@ const ManagerRecipe = () => {
   const [productsPerPage, setProductsPerPage] = useState(5);
   const [showModal, setShowModal] = useState(false);
 
-
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentRecipe = recipeList.slice(
@@ -57,12 +56,12 @@ const ManagerRecipe = () => {
     }
   };
 
+  //
   const handleEdit = (id) => {
     setEditId(id);
     setEditTitle(recipeList.find((recipe) => recipe.id === id).title);
     setShowModal(true);
   };
-
   const handleSave = async (id, title) => {
     await updateDoc(doc(db, "recipes", id), { title });
     setRecipeListList(
@@ -77,7 +76,7 @@ const ManagerRecipe = () => {
   const handleCloseModal = () => {
     setShowModal(false);
   };
-
+  //
   return (
     <div>
       <div>
@@ -102,15 +101,6 @@ const ManagerRecipe = () => {
             {currentRecipe.map((item, index) => (
               <tr>
                 <td>{indexOfFirstProduct + index + 1}</td>
-                {/* {editId === item.id ? (
-                  <Input
-                    type="text"
-                    value={editTitle}
-                    onChange={(e) => setEditTitle(e.target.value)}
-                  />
-                ) : (
-                  item.title
-                )} */}
                 <td>{item.title}</td>
                 <td>
                   <img
@@ -129,19 +119,6 @@ const ManagerRecipe = () => {
                       class="fa fa-trash fs-5"
                       onClick={() => handleDelete(item.id)}
                     ></i>
-
-                    {/* {editId === item.id ? (
-                      <i
-                        class="fa fa-save fs-5"
-                        onClick={() => handleSave(item.id, editTitle)}
-                      ></i>
-                    ) : (
-                      <i
-                        class="fa fa-pencil fs-5"
-                        onClick={() => handleEdit(item.id)}
-                      ></i>
-                    )} */}
-
                     <i
                       class="fa fa-pencil fs-5"
                       onClick={() => handleEdit(item.id)}
@@ -153,7 +130,8 @@ const ManagerRecipe = () => {
           </tbody>
         </Table>
 
-        {showModal && (
+        
+        {/* {showModal && ( */}
           <Modal show={showModal} onHide={handleCloseModal}>
             <Modal.Header closeButton>
               <Modal.Title>Edit Recipe</Modal.Title>
@@ -177,7 +155,7 @@ const ManagerRecipe = () => {
               </Button>
             </Modal.Footer>
           </Modal>
-        )}
+        {/* )} */}
 
         <Pagination>
           {pageNumbers.map((number) => (
