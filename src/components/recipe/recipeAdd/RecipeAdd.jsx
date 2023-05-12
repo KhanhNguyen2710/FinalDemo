@@ -114,7 +114,7 @@ useEffect(() => {
 
 
   return (
-    <section>
+    <div>
       {/* ==================== Btn show modal ==================== */}
       <div className="d-flex justify-content-center text-align-center">
         <Button
@@ -143,6 +143,7 @@ useEffect(() => {
                 <Input
                   type="file"
                   style={{ borderRadius: "15px" }}
+                  required
                   // onChange={(e) => setFile(e.target.files[0])}
                   onChange={handleFileInputChange}
                 />
@@ -241,14 +242,14 @@ useEffect(() => {
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
-            <Button type="Submit" variant="primary" onClick={handleClose}>
+            <Button type="Submit" variant="primary">
               Save
             </Button>
           </Modal.Footer>
           {/* =======================Footer End======================= */}
         </Form>
       </Modal>
-    </section>
+    </div>
   );
 };
 

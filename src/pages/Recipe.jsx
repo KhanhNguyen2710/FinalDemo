@@ -7,9 +7,11 @@ import RecipeShow from "../components/recipe/recipeShow/RecipeShow";
 const Recipe = () => {
   return (
     <Helmet title="Recipe">
-      <RecipeAdd />
+      {/* <RecipeAdd /> */}
       {/* <RecipeTest /> */}
-      <RecipeShow />
+      <section>
+        <RecipeShow />
+      </section>
     </Helmet>
   );
 };
