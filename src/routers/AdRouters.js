@@ -5,6 +5,7 @@ import ManagerAccount from "../Admin/managerAccount/ManagerAccount";
 import ManagerProduct from "../Admin/managerProduct/ManagerProduct";
 import Home from "../pages/Home";
 import ManagerRecipe from "../Admin/managerRecipe/ManagerRecipe";
+import ManagerOrder from "../Admin/managerOrder/ManagerOrder";
 
 const AdRouters = () => {
   return (
@@ -13,6 +14,7 @@ const AdRouters = () => {
       <Route path="/chart" element={<Chart />} />
       <Route path="/managerProduct" element={<ManagerProduct />} />
       <Route path="/managerRecipe" element={<ManagerRecipe />} />
+      <Route path="/managerOrder" element={<ManagerOrder />} />
     </Routes>
   );
 };

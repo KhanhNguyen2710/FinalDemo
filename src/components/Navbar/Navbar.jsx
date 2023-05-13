@@ -64,6 +64,7 @@ useEffect(() => {
   };
   const menuDown = [
     { display: "Profile", path: "/profile" },
+    { display: "Order History", path: "/checkout-history" },
     { display: "Admin", path: "/admin", component: AdminOnly },
     { display: "Log Out", onClick: logout },
   ];

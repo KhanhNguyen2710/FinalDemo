@@ -15,7 +15,6 @@ const EditRecipe = ({
   onClose,
   ...props
 }) => {
-  const [show, setShow] = useState(false);
 
 
 
@@ -27,6 +26,7 @@ const EditRecipe = ({
     const file = e.target.files[0];
     setPreview(URL.createObjectURL(file));
     setFile(file);
+    setRecipe((prevState) => ({ ...prevState, img: file })); // 
   };
 
   // Add ingredient
@@ -57,9 +57,16 @@ const EditRecipe = ({
     description: description,
     ingredient: ingredient,
     steps: steps,
+    // img: "",
+    // title: "",
+    // description: "",
+    // ingredient: [],
+    // steps: [],
   };
 
   const [recipe, setRecipe] = useState({ ...initialState });
+  // const [newRecipe, setNewRecipe] = useState({ ...initialState });
+
 
   const handleEdit = async (e) => {
     e.preventDefault();
@@ -74,19 +81,12 @@ const EditRecipe = ({
       // Clear form fields
       setRecipe({ ...initialState });
       
- handleClose();
+
       
     } catch (error) {
       console.log(error);
     }
   };
-
-
-  const [showModal, setShowModal] = useState(false);
-  const [formData, setFormData] = useState({});
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
 
   return (
@@ -205,7 +205,7 @@ const EditRecipe = ({
             <Button variant="secondary" onClick={onClose}>
               Close
             </Button>
-            <Button type="Submit" variant="primary">
+            <Button type="Submit" variant="primary" onHide={onClose}>
               Save
             </Button>
           </Modal.Footer>

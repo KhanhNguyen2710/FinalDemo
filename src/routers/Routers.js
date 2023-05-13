@@ -19,6 +19,7 @@ import Checkout from "../pages/Checkout";
 import UserOnly from "../User/userOnly/UserOnly";
 import ProtectedRoute from "./ProtectedRoute";
 import CheckOutSuccess from "../components/checkOut/CheckOutSuccess";
+import CheckOutHistory from "../components/checkOut/CheckOutHistory";
 
 const Routers = () => {
   return (
@@ -62,6 +63,7 @@ const Routers = () => {
       />
       {/* CHECK OUT */}
       <Route path="/checkout-success" element={<CheckOutSuccess />} />
+      <Route path="/checkout-history" element={<CheckOutHistory />} />
     </Routes>
   );
 };

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, Container } from 'react-bootstrap'
+import { Link } from 'react-router-dom';
 
 const CheckOutSuccess = () => {
   return (
@@ -11,9 +12,11 @@ const CheckOutSuccess = () => {
             We appreciate your business and look forward to serving you again in
             the future.
           </p>
-          <Button>
-            Go To <span>Order History</span>
-          </Button>
+          <Link to="/checkout-history">
+            <Button>
+              Go To Order History
+            </Button>
+          </Link>
         </div>
       </Container>
     </section>

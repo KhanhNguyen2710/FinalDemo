@@ -39,10 +39,15 @@ const SideBarAd = () => {
       icon: <i class="ri-file-list-fill fs-5"></i>,
     },
     {
-      link: "/admin/chart",
-      name: " Chart",
-      icon: <i class="ri-bar-chart-fill fs-5"></i>,
+      link: "/admin/managerOrder",
+      name: " Manager Order",
+      icon: <i class="ri-shopping-cart-fill fs-5"></i>,
     },
+    // {
+    //   link: "/admin/chart",
+    //   name: " Chart",
+    //   icon: <i class="ri-bar-chart-fill fs-5"></i>,
+    // },
   ];
  const [activeItem, setActiveItem] = useState(null);
  const handleItemClick = (item) => {

@@ -15,13 +15,10 @@ import EditRecipe from "./EditRecipe";
 
 const ManagerRecipe = () => {
   const [recipeList, setRecipeListList] = useState([]);
-  //
-  const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage, setProductsPerPage] = useState(5);
-
   const [modalShow, setModalShow] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
+  const [filteredRecipeList, setFilteredRecipeList] = useState([]);
 
-  
   useEffect(() => {
     const getData = async () => {
       let data = [];
@@ -35,15 +32,26 @@ const ManagerRecipe = () => {
     getData();
   }, []);
 
-  const indexOfLastProduct = currentPage * productsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentRecipe = recipeList.slice(
-    indexOfFirstProduct,
-    indexOfLastProduct
-  );
+  const handleSearch = () => {
+    const filteredList = recipeList.filter((recipe) => {
+      const { title } = recipe;
+      const searchValue = searchInput.toLowerCase();
+      return title.toLowerCase().includes(searchValue);
+    });
+    setFilteredRecipeList(filteredList);
+  };
+
+  //implement pagination
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [recipesPerPage] = useState(5);
+
+  const indexOfLastRecipe = currentPage * recipesPerPage;
+  const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
+  const currentRecipe = recipeList.slice(indexOfFirstRecipe, indexOfLastRecipe);
   const pageNumbers = [];
 
-  for (let i = 1; i <= Math.ceil(recipeList.length / productsPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(recipeList.length / recipesPerPage); i++) {
     pageNumbers.push(i);
   }
 
@@ -85,8 +93,18 @@ const ManagerRecipe = () => {
         <RecipeAdd />
       </div>
       <div className="d-flex mt-3">
-        <Input type="text" placeholder="Search" />
-        <Button>search</Button>
+        <Input
+          type="text"
+          placeholder="Search"
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleSearch();
+            }
+          }}
+        />
+        <Button onClick={handleSearch}>search</Button>
       </div>
       <>
         <Table striped bordered hover>
@@ -100,41 +118,47 @@ const ManagerRecipe = () => {
             </tr>
           </thead>
           <tbody>
-            {currentRecipe.map((item, index) => (
+            {currentRecipe.length === 0 ? (
               <tr>
-                <td>{indexOfFirstProduct + index + 1}</td>
-                <td>{item.title}</td>
-                <td>
-                  <img
-                    src={item.img}
-                    alt=""
-                    style={{
-                      width: "100px",
-                      height: "100px",
-                      objectFit: "cover",
-                    }}
-                  />
-                </td>
-
-                <td>
-                  <div className="d-flex gap-4 " style={{ width: "30px" }}>
-                    <i class="ri-eye-fill fs-5"></i>
-                    <i
-                      class="fa fa-pencil fs-5"
-                      // onClick={() => handleEdit(item.id)}
-                      onClick={() => {
-                        getDocument(item.id);
-                        setModalShow(true);
-                      }}
-                    ></i>
-                    <i
-                      class="fa fa-trash fs-5"
-                      onClick={() => handleDelete(item.id)}
-                    ></i>
-                  </div>
-                </td>
+                <td colSpan="6">No recipes found.</td>
               </tr>
-            ))}
+            ) : (
+              currentRecipe.map((item, index) => (
+                <tr>
+                  <td>{indexOfFirstRecipe + index + 1}</td>
+                  <td>{item.title}</td>
+                  <td>
+                    <img
+                      src={item.img}
+                      alt=""
+                      style={{
+                        width: "100px",
+                        height: "100px",
+                        objectFit: "cover",
+                      }}
+                    />
+                  </td>
+
+                  <td>
+                    <div className="d-flex gap-4 " style={{ width: "30px" }}>
+                      {/* <i class="ri-eye-fill fs-5"></i> */}
+                      <i
+                        class="fa fa-pencil fs-5"
+                        // onClick={() => handleEdit(item.id)}
+                        onClick={() => {
+                          getDocument(item.id);
+                          setModalShow(true);
+                        }}
+                      ></i>
+                      <i
+                        class="fa fa-trash fs-5"
+                        onClick={() => handleDelete(item.id)}
+                      ></i>
+                    </div>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </Table>
 
@@ -152,11 +176,10 @@ const ManagerRecipe = () => {
             onHide={() => {
               setModalShow(false);
               fetchData();
-              
+              window.location.reload();
             }}
             onClose={() => {
               setModalShow(false);
-              
             }}
           />
         )}
