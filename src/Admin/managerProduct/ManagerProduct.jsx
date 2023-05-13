@@ -104,30 +104,7 @@ const ManagerProduct = () => {
               </tr>
             </thead>
             <tbody>
-              {/* {currentProducts.map((item, index) => (
-                <tr key={index}>
-                  <td>{indexOfFirstProduct + index + 1}</td>
-                  <td>{item.productName}</td>
-                  <td>{item.price + "$"} </td>
-                  <td>
-                    <img
-                      src={item.img}
-                      alt=""
-                      style={{ width: "auto", height: "100px" }}
-                    />
-                  </td>
-                  <td>
-                    <div className="d-flex gap-4 " style={{ width: "30px" }}>
-                      <i
-                        class="fa fa-trash fs-5"
-                        onClick={() => handleDelete(item.id)}
-                      ></i>
-
-                      <i class="fa fa-pencil fs-5"></i>
-                    </div>
-                  </td>
-                </tr>
-              ))} */}
+           
               {currentProducts.length === 0 ? (
                 <tr>
                   <td colSpan="6">No products found.</td>
@@ -147,12 +124,11 @@ const ManagerProduct = () => {
                     </td>
                     <td>
                       <div className="d-flex gap-4 " style={{ width: "30px" }}>
+                        <i class="fa fa-pencil fs-5"></i>
                         <i
                           class="fa fa-trash fs-5"
                           onClick={() => handleDelete(item.id)}
                         ></i>
-
-                        <i class="fa fa-pencil fs-5"></i>
                       </div>
                     </td>
                   </tr>
@@ -160,6 +136,9 @@ const ManagerProduct = () => {
               )}
             </tbody>
           </Table>
+
+          
+          
 
           <Pagination>
             {pageNumbers.map((number) => (

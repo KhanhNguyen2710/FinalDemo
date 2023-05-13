@@ -28,9 +28,9 @@ const CheckOutHistory = () => {
   }, []);
 
 
-  // const handleClick = (id) => {
-  //   navigate(`/order-details/${id}`);
-  // };
+  const handleClick = (orderId) => {
+    navigate(`/checkout-detail/${orderId}`);
+  };
 
   return (
     <section>
@@ -59,8 +59,8 @@ const CheckOutHistory = () => {
                     order;
 
                   return (
-                    <tr key={orderId}>
-                      <td>{index +1}</td>
+                    <tr key={orderId} onClick={() => handleClick(orderId)}>
+                      <td>{index + 1}</td>
                       <td>{orderId}</td>
                       <td>
                         {createDate} at {createTime}

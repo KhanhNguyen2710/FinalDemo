@@ -186,27 +186,25 @@ useEffect(() => {
 
                 {/* ====== Add ingredient ====== */}
                 <Form.Group>
-                  
-                    <label style={{ marginRight: "10px", marginTop: "30px" }}>
-                      Ingredient :{" "}
-                    </label>
-                    {ingredient.map((ingredient, index) => (
-                      <Form.Control
-                        key={index}
-                        type="text"
-                        style={{ borderRadius: "10px", marginBottom: "15px" }}
-                        value={ingredient}
-                        onChange={(e) => handleIngredient(e, index)}
-                      />
-                    ))}
-                    <Button
-                      style={{ padding: "8px" }}
-                      type="button"
-                      onClick={handleIngredientCount}
-                    >
-                      Add Ingredient
-                    </Button>
-                 
+                  <label style={{ marginRight: "10px", marginTop: "30px" }}>
+                    Ingredient :{" "}
+                  </label>
+                  {ingredient.map((ingredient, index) => (
+                    <Form.Control
+                      key={index}
+                      type="text"
+                      style={{ borderRadius: "10px", marginBottom: "15px" }}
+                      value={ingredient}
+                      onChange={(e) => handleIngredient(e, index)}
+                    />
+                  ))}
+                  <Button
+                    style={{ padding: "8px" }}
+                    type="button"
+                    onClick={handleIngredientCount}
+                  >
+                    Add Ingredient
+                  </Button>
                 </Form.Group>
 
                 {/* ====== Add Step ====== */}
@@ -239,7 +237,7 @@ useEffect(() => {
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
-            <Button type="Submit" variant="primary">
+            <Button type="Submit" variant="primary" onClick={handleClose}  >
               Save
             </Button>
           </Modal.Footer>

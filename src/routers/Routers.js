@@ -1,9 +1,13 @@
 import React from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
-import AddProduct from "../components/product/add-Product/AddProduct";
+import { Route, Routes } from "react-router-dom";
 import Blog from "../pages/Blog";
 import Cart from "../pages/Cart.jsx";
 
+import AdminOnly from "../Admin/AdminOnly";
+import CheckOutDetail from "../components/checkOut/CheckOutDetail";
+import CheckOutHistory from "../components/checkOut/CheckOutHistory";
+import CheckOutSuccess from "../components/checkOut/CheckOutSuccess";
+import Checkout from "../pages/Checkout";
 import Home from "../pages/Home.jsx";
 import Login from "../pages/Login.jsx";
 import Product from "../pages/Product";
@@ -11,15 +15,8 @@ import ProductDetail from "../pages/ProductDetail";
 import Profile from "../pages/Profile";
 import Recipe from "../pages/Recipe.jsx";
 import Register from "../pages/Register.jsx";
-import Admin from "../Admin/Admin";
-import AdminOnly from "../Admin/AdminOnly";
 import AdRouters from "./AdRouters";
-import BlogAdd from "../components/blog/blogAdd/BlogAdd";
-import Checkout from "../pages/Checkout";
-import UserOnly from "../User/userOnly/UserOnly";
 import ProtectedRoute from "./ProtectedRoute";
-import CheckOutSuccess from "../components/checkOut/CheckOutSuccess";
-import CheckOutHistory from "../components/checkOut/CheckOutHistory";
 
 const Routers = () => {
   return (
@@ -64,6 +61,7 @@ const Routers = () => {
       {/* CHECK OUT */}
       <Route path="/checkout-success" element={<CheckOutSuccess />} />
       <Route path="/checkout-history" element={<CheckOutHistory />} />
+      <Route path="/checkout-detail/:id" element={<CheckOutDetail />} />
     </Routes>
   );
 };
