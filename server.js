@@ -13,19 +13,7 @@ app.get("/", (req, res) => {
 });
 
 
-// const array = [];
-// const calculateOrderAmount = (items) => {
-//   // items.map((item) => {
-//   //   const { price, cartQuantity } = item;
-//   //   const cartItemAmount = price * cartQuantity;
-//   //   return array.push(cartItemAmount);
-//   // });
-//   // const totalAmount = array.reduce((a, b) => {
-//   //   return a + b;
-//   // }, 0);
-
-//   return 1400 * 100;
-// };
+// const array = []
 
 app.post("/create-payment-intent", async (req, res) => {
   const { items, description, shipping } = req.body;

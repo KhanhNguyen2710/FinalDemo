@@ -48,7 +48,7 @@ const ManagerProduct = () => {
   const handleSearch = () => {
     const filteredList = productList.filter((product) => {
       const { productName } = product;
-      const searchValue = searchInput.toLowerCase();
+      const searchValue = searchInput.toLowerCase(); 
       return productName.toLowerCase().includes(searchValue);
     });
     setFilteredProductList(filteredList);
