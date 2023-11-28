@@ -128,7 +128,6 @@ const CheckOutForm = () => {
 
     try {
       addDoc(collection(db, "orders"), orderConfig);
-
       dispatch(clearCart());
       toast.success(" Save successfully");
       navigate("/checkout-success");

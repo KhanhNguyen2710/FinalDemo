@@ -12,30 +12,53 @@ const ManagerProduct = () => {
   const [searchInput, setSearchInput] = useState("");
   const [filteredProductList, setFilteredProductList] = useState([]);
 
-  useEffect(() => {
-    const getData = async () => {
-      let data = [];
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     let data = [];
+  //     const querySnapshot = await getDocs(collection(db, "product"));
+  //     querySnapshot.forEach((doc) => {
+  //       data.push({ id: doc.id, ...doc.data() });
+  //       console.log(doc.id, " => ", doc.data());
+  //     });
+  //     setProductList(data);
+  //   };
+  //   getData();
+  // }, []);
+
+  // const handleProductAdded = () => {
+  //   const getData = async () => {
+  //     let data = [];
+  //     const querySnapshot = await getDocs(collection(db, "product"));
+  //     querySnapshot.forEach((doc) => {
+  //       data.push({ id: doc.id, ...doc.data() });
+  //     });
+  //     setProductList(data);
+  //   };
+  //   getData();
+  // };
+
+  const getData = async () => {
+    try {
       const querySnapshot = await getDocs(collection(db, "product"));
+      let data = [];
       querySnapshot.forEach((doc) => {
         data.push({ id: doc.id, ...doc.data() });
-        console.log(doc.id, " => ", doc.data());
       });
       setProductList(data);
-    };
+    } catch (error) {
+      console.error("Error getting data: ", error);
+    }
+  };
+
+  useEffect(() => {
     getData();
   }, []);
 
   const handleProductAdded = () => {
-    const getData = async () => {
-      let data = [];
-      const querySnapshot = await getDocs(collection(db, "product"));
-      querySnapshot.forEach((doc) => {
-        data.push({ id: doc.id, ...doc.data() });
-      });
-      setProductList(data);
-    };
     getData();
   };
+
+
 
   const handleDelete = async (productId) => {
     await deleteDoc(doc(db, "product", productId));
@@ -66,7 +89,6 @@ const ManagerProduct = () => {
     indexOfLastProduct
   );
   const pageNumbers = [];
-
   for (let i = 1; i <= Math.ceil(productList.length / productsPerPage); i++) {
     pageNumbers.push(i);
   }

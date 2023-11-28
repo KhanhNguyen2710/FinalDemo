@@ -1,14 +1,26 @@
-import { Box, Divider,  List,  ListItem, ListItemButton, ListItemIcon,  ListItemText,  Toolbar } from "@mui/material";
+import {
+  Divider,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Toolbar,
+} from "@mui/material";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 // import AdminTabs from "./AdminTabs";
 import { signOut } from "firebase/auth";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import { auth } from "../../firebase";
 import "./SideBarAd.css";
-import { useState } from "react";
+
 
 const SideBarAd = () => {
+
+
+
+
   const navigate = useNavigate();
 
   const logout = () => {
@@ -21,6 +33,25 @@ const SideBarAd = () => {
         toast.error("Logout error");
       });
   };
+
+//     const [productList, setProductList] = useState([]);
+
+//   const getData = async () => {
+//     try {
+//       const querySnapshot = await getDocs(db);
+//       let data = [];
+//       querySnapshot.forEach((doc) => {
+//         data.push({ id: doc.id, ...doc.data() });
+//       });
+//       setProductList(data);
+//     } catch (error) {
+//       console.error("Error getting data: ", error);
+//     }
+//   };
+// useEffect(() => {
+//   getData();
+// }, []);
+  
 
   const AdminTabs = [
     {
@@ -43,18 +74,17 @@ const SideBarAd = () => {
       name: " Manager Order",
       icon: <i class="ri-shopping-cart-fill fs-5"></i>,
     },
-    // {
-    //   link: "/admin/chart",
-    //   name: " Chart",
-    //   icon: <i class="ri-bar-chart-fill fs-5"></i>,
-    // },
+    {
+      link: "/admin/dashboard",
+      name: " Chart",
+      icon: <i class="ri-bar-chart-fill fs-5"></i>,
+    },
   ];
- const [activeItem, setActiveItem] = useState(null);
- const handleItemClick = (item) => {
-   setActiveItem(item);
+  const [activeItem, setActiveItem] = useState(null);
+  const handleItemClick = (item) => {
+    setActiveItem(item);
   };
-  
-  
+
   return (
     <div
       className="sidebar"
@@ -91,7 +121,7 @@ const SideBarAd = () => {
           </Link>
         ))}
       </div>
-     
+
       <ListItem disablePadding className="sidebar-item" onClick={logout}>
         <ListItemButton className="no-hover">
           <ListItemIcon style={{ color: "white" }}>
@@ -101,8 +131,6 @@ const SideBarAd = () => {
           <ListItemText primary="Logout" />
         </ListItemButton>
       </ListItem>
-
-      
     </div>
   );
 };

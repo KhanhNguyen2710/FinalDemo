@@ -20,7 +20,7 @@ const RecipeTest = () => {
 
   const recipesCollectionRef = collection(db, "recipes");
 
-  // = >>>>>>> này show
+  //  show
 
   useEffect(() => {
     onSnapshot(recipesCollectionRef, (snapshot) => {

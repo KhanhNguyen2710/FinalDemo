@@ -9,7 +9,7 @@ const AuthReducer = createSlice({
     email: null,
     phone: null,
     uid: null,
-    photoURL:null,
+    photoURL: null,
   },
   reducers: {
     authLogin(state, action) {
